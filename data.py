@@ -39,26 +39,15 @@ def jabref_to_excel() -> pd.DataFrame:
         The DataFrame containing the core publications for each group
     """
     GROUPS = {
-        "AI on Edge Devices": ["", [], []],  # Artificial Intelligence
-        "Synthetic Biology": ["", [], []],  # Biology
-        "Resilience in Business and management": ["", [], []],  # Management
-        "Cervical Myelopathy": ["", [], []],  # Medicine
-        "Drones in Agriculture": ["", [], []],  # Agriculture
-        "Crop Yield Prediction": ["", [], []],  # Agriculture
-        "Robotic Arthroplasty": ["", [], []],  # Robots
-        "Soft Robotics": ["", [], []],  # Robots
-        "Tourism Growth Nexus": ["", [], []],  # Economics
-        "Energy Growth Nexus": ["", [], []],  # Economics
-        "Perovskite Solar Cells Stability": ["", [], []],  # Renewable Energy
-        "Sustainable Biofuel": ["", [], []],  # Renewable Energy
-        "Nanoparticles": ["", [], []],  # Nanotechnology
-        "Green Warehousing": ["", [], []],  # Climate Science
-        "Internet of Things in Healthcare": ["", [], []],  # Internet of Things
     }
     with open("data/publications.bib", encoding="utf-8") as bibtex_file:
         bibtex_database = bibtexparser.load(bibtex_file)
         for entry in bibtex_database.entries:
             group = entry["groups"]
+            if group not in GROUPS:
+                # [pub_id, [core_pub_ids], [core_pub_titles]]
+                GROUPS[group] = ["", [], []]
+
             pub_id = entry["url"].split("/")[-1]
             title = entry["title"]
             if "priority" in entry:
