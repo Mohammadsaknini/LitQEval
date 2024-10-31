@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import dimcli
 import json
+import openai
 
 class NumpyEncoder(json.JSONEncoder):
     """
@@ -40,7 +41,7 @@ def jabref_to_excel() -> pd.DataFrame:
     """
     GROUPS = {
     }
-    with open("data/publications.bib", encoding="utf-8") as bibtex_file:
+    with open("./data/publications.bib", encoding="utf-8") as bibtex_file:
         bibtex_database = bibtexparser.load(bibtex_file)
         for entry in bibtex_database.entries:
             group = entry["groups"]
@@ -104,9 +105,9 @@ def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(data)[attirbutes]
 
-if __name__ == "__main__":
+def download():
     df = jabref_to_excel()
     metadata = extract_metadata(df)
-    metadata.to_excel("data/metadata.xlsx", index=False)
-    df.to_excel("data/core_publications.xlsx", index=False)
+    metadata.to_excel("./data/metadata.xlsx", index=False)
+    df.to_excel("./data/core_publications.xlsx", index=False)
     
