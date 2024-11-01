@@ -1,0 +1,3 @@
+[submodule "LitQEval-report"]
+	path = LitQEval-report
+	url = https://github.com/Mohammadsaknini/LitQEval-report.git
