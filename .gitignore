@@ -164,3 +164,7 @@ cython_debug/
 
 # Dimensions credentials
 dsl.ini
+
+
+# vector stores
+data/vs

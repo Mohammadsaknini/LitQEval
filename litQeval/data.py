@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import dimcli
 import json
-import openai
 
 class NumpyEncoder(json.JSONEncoder):
     """
@@ -32,12 +31,12 @@ class NumpyEncoder(json.JSONEncoder):
     
 def jabref_to_excel() -> pd.DataFrame:
     """
-    Read the JabRef file and extract the core publications for each group
+    Read the JabRef file and extract the Pub_id for each group
 
     Returns
     -------
     df: pd.DataFrame
-        The DataFrame containing the core publications for each group
+        The DataFrame containing the Pub_id for each group
     """
     GROUPS = {
     }
@@ -59,8 +58,8 @@ def jabref_to_excel() -> pd.DataFrame:
 
     df = pd.DataFrame(GROUPS).T
     df.reset_index(inplace=True)
-    df.rename(columns={0: "Survey", 1: "Core Publications", 2: "Title", "index": "Group"}, inplace=True)
-    df = df.explode(["Core Publications", "Title"], ignore_index=True)
+    df.rename(columns={0: "Survey", 1: "Pub_id", 2: "Title", "index": "Topic"}, inplace=True)
+    df = df.explode(["Pub_id", "Title"], ignore_index=True)
     return df
 
 def get_query(attributes: str, pub_ids: str):
@@ -88,7 +87,7 @@ def get_query(attributes: str, pub_ids: str):
 def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
     dimcli.login()
     dsl = dimcli.Dsl()
-    pub_ids = list(set(df["Core Publications"].tolist() + df["Survey"].tolist()))
+    pub_ids = list(set(df["Pub_id"].tolist() + df["Survey"].tolist()))
     chunks = []
     data = []
     attirbutes = ["id","title", "doi", "abstract", "times_cited", "field_citation_ratio", "year"]
@@ -108,6 +107,6 @@ def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
 def download():
     df = jabref_to_excel()
     metadata = extract_metadata(df)
-    metadata.to_excel("./data/metadata.xlsx", index=False)
-    df.to_excel("./data/core_publications.xlsx", index=False)
+    metadata.to_excel("./data/text/metadata.xlsx", index=False)
+    df.to_excel("./data/text/core_publications.xlsx", index=False)
     
