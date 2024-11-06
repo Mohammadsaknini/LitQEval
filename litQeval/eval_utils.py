@@ -306,4 +306,6 @@ def fscore(presicion: float, recall: float, beta: float = 1) -> float:
     float
         The F1 score value.
     """
+    if recall == 0 or presicion == 0:
+        return 0
     return (1 + beta**2) * (presicion * recall) / ((beta**2 * presicion) + recall)
