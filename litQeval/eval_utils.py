@@ -196,18 +196,18 @@ def get_data(base_query: str, predicted_query: str) -> dict:
     Returns
     -------
     dict
-        A dictionary containing core publications, mean embedding, baseline 
+        A dictionary containing core publications, mean embedding, baseline
         and predicted publication datasets, as well as their embeddings.
     """
-    
+
     topic = base_query.replace('"', "")
     folder_name = topic.replace(" ", "_")
     text_folder = Path(f"./data/text/{folder_name}")
     vs_folder = Path(f"./data/vs/{folder_name}")
-    
+
     text_folder.mkdir(parents=True, exist_ok=True)
     vs_folder.mkdir(parents=True, exist_ok=True)
-    
+
     # Retrieve or load baseline publications
     baseline_path = text_folder / "baseline_pubs.csv"
     if baseline_path.exists():
@@ -215,7 +215,7 @@ def get_data(base_query: str, predicted_query: str) -> dict:
     else:
         baseline_pubs = get_pubs(base_query)
         baseline_pubs.to_csv(baseline_path, index=False)
-    
+
     # Retrieve or load predicted publications
     predicted_path = text_folder / "predicted_pubs.csv"
     if predicted_path.exists():
@@ -223,24 +223,29 @@ def get_data(base_query: str, predicted_query: str) -> dict:
     else:
         predicted_pubs = get_pubs(predicted_query)
         predicted_pubs.to_csv(predicted_path, index=False)
-    
+
     # Retrieve or compute baseline vector store embeddings
     baseline_vs_path = vs_folder / "baseline"
     if baseline_vs_path.exists():
-        baseline_vs = Chroma(folder_name, EMBEDDING_MODEL, persist_directory=str(baseline_vs_path))
+        baseline_vs = Chroma(
+            folder_name, EMBEDDING_MODEL, persist_directory=str(baseline_vs_path)
+        )
     else:
         baseline_vs = embed_pubs(folder_name, str(baseline_vs_path), baseline_pubs)
-    
+
     # Retrieve or compute predicted vector store embeddings
     predicted_vs_path = vs_folder / "predicted"
     if predicted_vs_path.exists():
-        predicted_vs = Chroma(folder_name, EMBEDDING_MODEL, persist_directory=str(predicted_vs_path))
+        predicted_vs = Chroma(
+            folder_name, EMBEDDING_MODEL, persist_directory=str(predicted_vs_path)
+        )
     else:
         predicted_vs = embed_pubs(folder_name, str(predicted_vs_path), predicted_pubs)
-    
+
     # Get core dataset publications and mean embedding
     core_pubs, core_mean_embedding = get_core_dataset(topic)
-    
+    core_vs = Chroma("core_publications", EMBEDDING_MODEL, persist_directory="./data/vs/core_publications")
+
     return {
         "core_pubs": core_pubs,
         "core_mean_embedding": core_mean_embedding,
@@ -248,6 +253,7 @@ def get_data(base_query: str, predicted_query: str) -> dict:
         "predicted_pubs": predicted_pubs,
         "baseline_vs": baseline_vs,
         "predicted_vs": predicted_vs,
+        "core_vs": core_vs,
     }
 
 
@@ -280,3 +286,24 @@ def evaluate_recall(
         "baseline_recall": baseline_recall,
         "predicted_recall": predicted_recall,
     }
+
+
+def fscore(presicion: float, recall: float, beta: float = 1) -> float:
+    """
+    Calculates the F score given the precision and recall values weighted by beta, higher beta values give more weight to recall.
+
+    Parameters
+    ----------
+    precision : float
+        The precision value.
+    recall : float
+        The recall value.
+    beta : float, optional
+        The beta value to use in the F1 score calculation, by default 1.
+
+    Returns
+    -------
+    float
+        The F1 score value.
+    """
+    return (1 + beta**2) * (presicion * recall) / ((beta**2 * presicion) + recall)
