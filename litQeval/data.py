@@ -85,6 +85,14 @@ def get_query(attributes: str, pub_ids: str):
     return query
 
 def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Extract the metadata for the publications in the DataFrame
+
+    Parameters
+    ----------
+    df: pd.DataFrame
+        The DataFrame containing the publication ids
+    """
     dimcli.login()
     dsl = dimcli.Dsl()
     pub_ids = list(set(df["Pub_id"].tolist() + df["Survey"].tolist()))
@@ -107,6 +115,7 @@ def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
 def download():
     df = jabref_to_excel()
     metadata = extract_metadata(df)
-    metadata.to_excel("./data/text/metadata.xlsx", index=False)
-    df.to_excel("./data/text/core_publications.xlsx", index=False)
+    metadata.to_excel("./data/metadata1.xlsx", index=False)
+    df.to_excel("./data/core_publications1.xlsx", index=False)
     
+download()
