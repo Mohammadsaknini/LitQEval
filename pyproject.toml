@@ -20,7 +20,9 @@ ipykernel = "^6.29.5"
 openpyxl = "^3.1.5"
 nbformat = "^5.10.4"
 ipywidgets = "^8.1.5"
-kaleido = "0.2.1"
+matplotlib = "^3.9.2"
+orca = "^1.8"
+kaleido = "0.1.0post1"
 
 
 [build-system]

@@ -1,6 +1,7 @@
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_core.documents import Document
 from langchain_chroma import Chroma
+import numpy.linalg as la
 from pathlib import Path
 from tqdm import tqdm
 import pandas as pd
@@ -309,3 +310,49 @@ def fscore(presicion: float, recall: float, beta: float = 1) -> float:
     if recall == 0 or presicion == 0:
         return 0
     return (1 + beta**2) * (presicion * recall) / ((beta**2 * presicion) + recall)
+
+
+def mvee(points, tol=0.0001):
+    """
+    Find the minimum volume ellipsoid that encloses a set of points
+
+    Parameters
+    ----------
+    points : np.ndarray
+        The points to find the minimum volume ellipsoid for.
+    tol : float, optional
+        The tolerance value for the algorithm, by default 0.0001.
+
+    Returns
+    -------
+    A : np.ndarray
+        The matrix representing the ellipsoid.
+    """
+
+    N, d = points.shape
+    Q = np.column_stack((points, np.ones(N))).T
+    err = tol+1.0
+    u = np.ones(N)/N
+    while err > tol:
+        # assert u.sum() == 1 # invariant
+        X = np.dot(np.dot(Q, np.diag(u)), Q.T)
+        M = np.diag(np.dot(np.dot(Q.T, la.inv(X)), Q))
+        jdx = np.argmax(M)
+        step_size = (M[jdx]-d-1.0)/((d+1)*(M[jdx]-1.0))
+        new_u = (1-step_size)*u
+        new_u[jdx] += step_size
+        err = la.norm(new_u-u)
+        u = new_u
+    c = np.dot(u, points)
+    A = la.inv(np.dot(np.dot(points.T, np.diag(u)), points)
+               - np.multiply.outer(c, c))/d
+    return A, c
+
+# point_wise
+def is_inside_ellipse(A, c, points):
+    return np.array([((point - c) @ A @ (point - c).T) <= 1 for point in tqdm(points)])
+
+# if we have enough memory
+def is_inside_ellipse_v2(A, c, points):
+    shifted_points = points - c
+    return np.diag((shifted_points @ A) @ shifted_points.T <= 1)
