@@ -115,7 +115,7 @@ def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
 def download():
     df = jabref_to_excel()
     metadata = extract_metadata(df)
-    metadata.to_excel("./data/metadata1.xlsx", index=False)
-    df.to_excel("./data/core_publications1.xlsx", index=False)
+    metadata.to_excel("./data/metadata.xlsx", index=False)
+    df.to_excel("./data/core_publications.xlsx", index=False)
     
 download()
