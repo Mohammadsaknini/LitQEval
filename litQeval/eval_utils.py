@@ -8,12 +8,15 @@ import pandas as pd
 import numpy as np
 import dimcli
 
-EMBEDDING_MODEL = OpenAIEmbeddings(
-    model="text-embedding-3-small",
-    chunk_size=1000,
-    check_embedding_ctx_length=False,
-    show_progress_bar=True,
-)
+try:
+    EMBEDDING_MODEL = OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        chunk_size=1000,
+        check_embedding_ctx_length=False,
+        show_progress_bar=True,
+    )
+except:
+    EMBEDDING_MODEL = None
 
 
 def recall(core: list, predicted: list) -> float:
