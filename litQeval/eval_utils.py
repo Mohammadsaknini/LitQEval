@@ -76,7 +76,7 @@ def execute_query(query: str) -> pd.DataFrame:
     """
     dimcli.login()
     dsl = dimcli.Dsl()
-    response = dsl.query_iterative(query, maxlimit=14000)  # type: dimcli.DslDataset
+    response = dsl.query_iterative(query)  # type: dimcli.DslDataset
     return response.as_dataframe()
 
 
