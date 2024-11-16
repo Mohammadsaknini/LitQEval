@@ -1,4 +1,5 @@
 from langchain_openai.embeddings import OpenAIEmbeddings
+from sklearn.metrics.pairwise import cosine_similarity
 from langchain_core.documents import Document
 from langchain_chroma import Chroma
 import numpy.linalg as la
@@ -39,7 +40,7 @@ def recall(core: list, predicted: list) -> float:
     return intersection / len(core)
 
 
-def format_search_query(query: str, slr:bool):
+def format_search_query(query: str, slr: bool):
     """
     Formats a given boolean query to be used in the Dimensions API
 
@@ -58,7 +59,7 @@ def format_search_query(query: str, slr:bool):
     query = query.replace('"', '\\"')
     if slr:
         query = f"""search publications in full_data for "{query}" where publisher="Institute of Electrical and Electronics Engineers (IEEE)" return publications[id+title+abstract]"""
-    else:    
+    else:
         query = f"""search publications in title_abstract_only for "{query}" return publications[id+title+abstract]"""
     return query
 
@@ -155,8 +156,8 @@ def embed_pubs(collection_name: str, path: str, pubs: pd.DataFrame) -> Chroma:
     vs = Chroma(collection_name, EMBEDDING_MODEL, persist_directory=path)
     chunk_ids_pair = [
         (
-            documents[i : i + 5000],
-            [doc.metadata["id"] for doc in documents[i : i + 5000]],
+            documents[i: i + 5000],
+            [doc.metadata["id"] for doc in documents[i: i + 5000]],
         )
         for i in range(0, len(documents), 5000)
     ]
@@ -177,8 +178,8 @@ def get_core_dataset(topic: str) -> tuple[list, np.ndarray]:
     -------
     group_embeddings: list
         The list of core publications for the given topic
-    group_mean_embedding: np.NDArray
-        The mean embedding of the core publications for the given topic
+    embeddings: np.NDArray
+        The embeddings of the core publications for the given topic
     """
     df = pd.read_excel("./data/core_publications.xlsx")
     collection = Chroma(
@@ -189,9 +190,10 @@ def get_core_dataset(topic: str) -> tuple[list, np.ndarray]:
     core_pubs = df[df["Topic"] == topic]["Pub_id"]
     embeddings = []
     for i in core_pubs.values:
-        embeddings.append(collection.get(i, include=["embeddings"])["embeddings"])
+        embeddings.append(collection.get(
+            i, include=["embeddings"])["embeddings"])
 
-    return core_pubs.tolist(), np.mean(embeddings, axis=0)
+    return core_pubs.tolist(), np.squeeze(embeddings)
 
 
 def get_data(base_query: str, predicted_query: str, slr=False) -> dict:
@@ -242,32 +244,42 @@ def get_data(base_query: str, predicted_query: str, slr=False) -> dict:
     baseline_vs_path = vs_folder / "baseline"
     if baseline_vs_path.exists():
         baseline_vs = Chroma(
-            folder_name, EMBEDDING_MODEL, persist_directory=str(baseline_vs_path)
+            folder_name, EMBEDDING_MODEL, persist_directory=str(
+                baseline_vs_path)
         )
     else:
-        baseline_vs = embed_pubs(folder_name, str(baseline_vs_path), baseline_pubs)
+        baseline_vs = embed_pubs(folder_name, str(
+            baseline_vs_path), baseline_pubs)
 
     # Retrieve or compute predicted vector store embeddings
     predicted_vs_path = vs_folder / "predicted"
     if predicted_vs_path.exists():
         predicted_vs = Chroma(
-            folder_name, EMBEDDING_MODEL, persist_directory=str(predicted_vs_path)
+            folder_name, EMBEDDING_MODEL, persist_directory=str(
+                predicted_vs_path)
         )
     else:
-        predicted_vs = embed_pubs(folder_name, str(predicted_vs_path), predicted_pubs)
+        predicted_vs = embed_pubs(folder_name, str(
+            predicted_vs_path), predicted_pubs)
 
     # Get core dataset publications and mean embedding
-    core_pubs, core_mean_embedding = get_core_dataset(topic)
-    core_vs = Chroma("core_publications", EMBEDDING_MODEL, persist_directory="./data/vs/core_publications")
+    core_pubs, core_embeddings = get_core_dataset(topic)
+    core_vs = Chroma("core_publications", EMBEDDING_MODEL,
+                     persist_directory="./data/vs/core_publications")
 
+    core_mean_embedding = np.mean(core_embeddings, axis=0).reshape(1, -1)
+    cos_threshold = cosine_similarity(core_mean_embedding, core_embeddings).flatten().min()
     return {
-        "core_pubs": core_pubs,
-        "core_mean_embedding": core_mean_embedding,
         "baseline_pubs": baseline_pubs,
         "predicted_pubs": predicted_pubs,
         "baseline_vs": baseline_vs,
         "predicted_vs": predicted_vs,
         "core_vs": core_vs,
+        "core_pubs": core_pubs,
+        "core_mean_embedding": core_mean_embedding,
+        "core_embeddings": core_embeddings,
+        # The threshold to the least similar core publication from the mean embedding
+        "core_threshold": cos_threshold, 
     }
 
 
@@ -362,10 +374,14 @@ def mvee(points, tol=0.0001):
     return A, c
 
 # point_wise
+
+
 def is_inside_ellipse(A, c, points):
     return np.array([((point - c) @ A @ (point - c).T) <= 1 for point in tqdm(points)])
 
 # if we have enough memory
+
+
 def is_inside_ellipse_v2(A, c, points):
     shifted_points = points - c
     return np.diag((shifted_points @ A) @ shifted_points.T <= 1)

@@ -1,0 +1,66 @@
+[
+    {
+        "baseline": "Robotic Arthroplasty",
+        "predicted": "\"digital surgery\" OR \"surgical navigation\" OR \"haptic feedback\" OR \"robot-assisted surgery\" OR \"prosthetic devices\" OR \"computer-assisted surgery\" OR \"surgical workflow\" OR (robotic arthroplasty) OR \n((\"clinical trials\" OR \"rehabilitation\" OR \"recovery time\" OR \"3d imaging\" OR \"patient satisfaction\" OR \"minimally invasive surgery\" OR \"surgical safety\" OR \"advanced imaging techniques\" OR \"orthopedic surgery\" OR \"total hip arthroplasty\" OR \"total knee arthroplasty\" OR \"biomechanics\" OR \"surgeon training\" OR \"motion planning\" OR \"joint replacement\" OR \"surgical precision\" OR \"robotic surgery\" OR \"implant technology\" OR \"surgery simulation\" OR \"surgical robotics\") AND (\"Arthoplasty\"))"
+    },
+    {
+        "baseline": "Soft Robotics",
+        "predicted": "\"compliant materials\" OR (soft robotics) OR \"soft actuators\" OR \"rehabilitation robotics\" OR \"pneumatic actuators\" OR \"robotic locomotion\" OR \"soft robotic systems\" OR \"soft robot control\" OR \"multi-material printing\" OR \"bio-inspired robotics\" OR \"continuum robots\" OR \"soft robot fabrication\" OR \"shape-morphing structures\" OR \"energy-efficient robotics\" OR \"soft robotic grippers\" OR \"soft exoskeletons\" OR \"soft robotic arms\" OR \"soft wearable robots\" OR \"autonomous soft robots\" OR \n((\"material properties\" OR \"adaptive control\" OR \"sensor integration\" OR \"flexible materials\" OR \"human-robot interaction\" OR \"deformation mechanics\" OR \"lightweight structures\" OR \"soft sensors\" OR \"artificial muscles\" OR \"robotic manipulation\") AND (Robot OR Soft))"
+    },
+    {
+        "baseline": "Crop Yield Prediction",
+        "predicted": "\"crop yield estimation\" OR \"crop simulation models\" OR \"yield forecasting\" OR \"soil health assessment\" OR \"precision agriculture\" OR \"sustainable farming practices\" OR \"weather pattern analysis\" OR (crop yield prediction) OR \"crop variety selection\" OR \"irrigation optimization\" OR \"technology adoption in agriculture\" OR \"agroecology\" OR \"data-driven agriculture\" OR \"economic viability of crops\" OR \n((\"predictive modeling\" OR \"risk assessment\" OR \"climate change\" OR \"machine learning\" OR \"remote sensing\" OR \"land use change\" OR \"environmental impact assessment\" OR \"food security\" OR \"agricultural policies\" OR \"nutrient management\" OR \"satellite imagery\" OR \"farming systems analysis\" OR \"earth observation data\" OR \"phenotyping\" OR \"big data analytics\" OR \"climate resilience\") AND ((Crop Yield)))"
+    },
+    {
+        "baseline": "Software Process Line",
+        "predicted": "(\"process adaptation\" OR \"processes adaptation\" OR \"customization of processes\" OR \"software processes customization\" OR \"software process customization\" OR \"customizing software processes\" OR \"process definition\" OR \"processes definition\" OR \"process composition\" OR \"compose processes\" OR \"processes composition\" OR \"process tailoring\" OR \"processes tailoring\" OR \"tailing of processes\" OR \"process development\" OR \"processes development\" OR \"process engineering\" OR \"processes engineering\" OR \"process design\" OR \"software process modelling\" OR \"software process modelling\" OR \"process implementation\" OR \"managing processes\")\n\nAND\n\n(\"family of software process\" OR \"family of software processes\" OR \"families of software process\" OR \"families of software processes\" OR \"software process line\" OR \"software process lines\" OR \"software processes line\" OR \"software processes lines\" OR \"process-line\" OR \"process-lines\" OR \"processes-line\" OR \"processes-lines\" OR \"software process family\" OR \"software processes family\" OR \"software process families\" OR \"software processes families\" OR \"process-family\" OR \"processes-family\" OR \"process-families\" OR \"processes-families\" OR \"software process variability\" OR \"software process variabilities\" OR \"software processes variability\" OR \"software processes variabilities\" OR \"variabilities in software processes\" OR \"process domain engineering\" OR \"processes domain engineering\" OR \"process feature\" OR \"process features\" OR \"processes feature\" OR \"processes features\" OR \"process asset reuse\")"
+    },
+    {
+        "baseline": "Synthetic Biology",
+        "predicted": "(synthetic biology) OR \"genome editing\" OR \"microbial engineering\" OR \"synthetic organisms\" OR \"rna engineering\" OR \"environmental biotechnology\" OR \"bioprinting\" OR \"biomolecular engineering\" OR \"synthetic ecology\" OR \"synthetic genomics\" OR \"biomanufacturing\" OR \"biocontainment\" OR \"biodesign\" OR \"designer organisms\" OR \"chassis organisms\" OR \n((\"gene synthesis\" OR \"dna synthesis\" OR \"molecular biology\" OR \"systems biology\" OR \"bioinformatics\" OR \"cell-free systems\" OR \"protein engineering\" OR \"biotechnology\" OR \"directed evolution\" OR \"gene drives\" OR \"genetic engineering\" OR \"crispr\" OR \"synthetic pathways\" OR \"pathway engineering\" OR \"metabolic engineering\") AND (Synthetic))"
+    },
+    {
+        "baseline": "Resilience in Business and management",
+        "predicted": "\"resilience assessment\" OR \"resilience strategies\" OR \"resilience evaluation\" OR \"resilience frameworks\" OR \"environmental resilience\" OR \"resilience as a capacity\" OR \"disaster recovery\" OR \"psychological resilience\" OR \"emotional resilience\" OR \"resourcefulness\" OR \"business continuity\" OR \"resilience training\" OR \"strategic flexibility\" OR \"continuity planning\" OR \"innovation resilience\" OR \"resilience culture\" OR \"resilience measurement\" OR \"organizational resilience\" OR \"operational resilience\" OR \"business agility\" OR \"team resilience\" OR \"resilience in leadership\" OR \"supply chain resilience\" OR (resilience in business and management) OR \n((\"change management\" OR \"risk management\" OR \"sustainability\" OR \"adaptive capacity\" OR \"crisis management\" OR \"scenario planning\" OR \"stakeholder engagement\" OR \"crisis communication\") AND (resilience and management))"
+    },
+    {
+        "baseline": "Cervical Myelopathy",
+        "predicted": "\"spinal cord compression\" OR \"spinal stenosis\" OR (cervical myelopathy) OR \"gait disturbance\" OR \"degenerative disc disease\" OR \"spinal alignment\" OR \"myelopathy symptoms\" OR \"nerve root compression\" OR \"cervical spondylosis\" OR \"cervical spondylotic myelopathy\" OR \"upper motor neuron signs\" OR \n((\"mri imaging\" OR \"cervical spine\" OR \"neurological examination\" OR \"emg studies\" OR \"reflex changes\" OR \"sensory loss\" OR \"decompression surgery\") AND (Myelopathy))"
+    },
+    {
+        "baseline": "Drones in Agriculture",
+        "predicted": "\"precision agriculture\" OR \"geospatial analysis\" OR \"aerial imagery\" OR \"pesticide spraying\" OR \"crop health assessment\" OR \"drone technology\" OR \"autonomous drones\" OR \"crop insurance\" OR \"agroecology\" OR \"farm management software\" OR \"agricultural robotics\" OR \"field scouting\" OR (drones in agriculture) OR \"agricultural drone\" OR \n((\"yield estimation\" OR \"remote sensing\" OR \"variable rate application\" OR \"data analytics\" OR \"nutrient management\" OR \"land surveying\" OR \"unmanned aerial vehicle\" OR \"irrigation management\" OR \"climate monitoring\" OR \"sustainable farming\" OR \"farm productivity\" OR \"crop monitoring\") AND (Drones OR Agriculture))"
+    },
+    {
+        "baseline": "Tourism Growth Nexus",
+        "predicted": "\"heritage tourism\" OR \"nature tourism\" OR \"tourist attractions\" OR \"hospitality industry\" OR \"economic impact of tourism\" OR \"rural tourism\" OR \"urban tourism\" OR \"ecotourism\" OR \"tourism infrastructure\" OR \"community-based tourism\" OR \"tourism investment\" OR \"medical tourism\" OR \"digital tourism\" OR \"tourism statistics\" OR \"responsible tourism\" OR \"seasonal tourism\" OR \"adventure tourism\" OR (tourism growth nexus) OR \n((\"tourism development\" OR \"tourism management\" OR \"tourism marketing\" OR \"cultural tourism\" OR \"travel technology\" OR \"sustainable tourism\" OR \"destination management\" OR \"tourism policy\" OR \"business tourism\" OR \"global tourism\" OR \"travel trends\" OR \"tourist behavior\") AND (Nexus))"
+    },
+    {
+        "baseline": "Sustainable Biofuel Economy",
+        "predicted": "\"exergy analysis\" OR \"sustainable biofuel\" OR \"lifecycle assessment\" OR \"carbon neutrality\" OR \"algal biofuels\" OR \"food vs fuel debate\" OR \n((\"waste-to-energy\" OR \"feedstock\" OR \"biodiesel\" OR \"economic viability\" OR \"bioenergy\" OR \"agricultural residues\" OR \"fossil fuel alternatives\" OR \"circular economy\" OR \"bioethanol\" OR \"energy independence\") AND (Biofuel))"
+    },
+    {
+        "baseline": "Perovskite Solar Cells Stability",
+        "predicted": "\"perovskite solar cells\" OR \"perovskite composition\" OR \"moisture resistance\" OR \"halide perovskites\" OR \"bandgap engineering\" OR \"photoelectric conversion\" OR \"mapbi3\" OR \"fapbi3\" OR \n((\"efficiency\" OR \"stability\" OR \"degradation\" OR \"thermal stability\" OR \"nucleation\" OR \"doping effects\" OR \"fabrication techniques\" OR \"molecular dynamics simulations\" OR \"structural stability\" OR \"defect states\" OR \"scalability\" OR \"environmental stability\" OR \"lifespan\" OR \"energy conversion efficiency\" OR \"crystallization process\" OR \"interface stability\" OR \"photovoltaic performance\" OR \"solar energy conversion\" OR \"optoelectronic properties\" OR \"thin-film technology\" OR \"surface passivation\" OR \"charge carrier dynamics\") AND (perovskite AND Solar))"
+    },
+    {
+        "baseline": "Nanopharmaceuticals OR Nanonutraceuticals",
+        "predicted": "\"nanocarriers\" OR \"nanoparticle characterization\" OR \"translational medicine\" OR \"camptothecin\" OR \"ribonucleotide reductase inhibitors\" OR (nanopharmaceuticals) OR (nanonutraceuticals) OR \n((\"pharmacodynamics\" OR \"personalized medicine\") AND (nanoparticles))"
+    },
+    {
+        "baseline": "Green Warehousing",
+        "predicted": "\"climate action\" OR \"logistics efficiency\" OR \"circular economy\" OR \"sustainable logistics\" OR \"sustainable supply chain\" OR \"supply chain sustainability\" OR \"green building design\" OR \"inventory optimization\" OR \"green transportation\" OR \"eco-efficient processes\" OR \"carbon footprint reduction\" OR \"green certifications\" OR \"sustainable procurement\" OR \"warehouse automation\" OR \"eco-friendly packaging\" OR \"leed certification\" OR \"smart warehousing\" OR \"last mile delivery solutions\" OR (green warehousing) OR \"cold chain sustainability\" OR \n((\"energy efficiency\" OR \"renewable energy\" OR \"emission reduction\" OR \"environmental impact assessment\" OR \"energy management systems\" OR \"waste management\" OR \"sustainable operations\" OR \"transport emissions\" OR \"green technologies\" OR \"resource optimization\") AND (Warehousing))"
+    },
+    {
+        "baseline": "AI on Edge Devices",
+        "predicted": "\"edge data processing\" OR \"distributed machine learning\" OR \"hardware acceleration\" OR \"deep learning inference\" OR \"edge infrastructure\" OR \"federated learning\" OR \"context-aware computing\" OR \"resource-constrained environments\" OR \"sensor data analytics\" OR \"smart edge applications\" OR \"edge-to-cloud architecture\" OR \"on-device ai\" OR \"latency-sensitive applications\" OR \"edge analytics\" OR \"ai model deployment\" OR \"edge ai devices\" OR (ai on edge devices) OR \"energy-efficient ai\" OR \"cognitive edge computing\" OR \"privacy-preserving ai\" OR \"ai inference engines\" OR \"scalability in edge ai\" OR \"ai multi-tenancy\" OR \n((\"autonomous systems\" OR \"real-time data processing\" OR \"model compression\" OR \"internet of things (iot)\" OR \"low latency\" OR \"edge computing\" OR \"neural network optimization\" OR \"heterogeneous computing\") AND (Edge Devices))"
+    },
+    {
+        "baseline": "Internet of Things in Healthcare",
+        "predicted": "\"smart healthcare\" OR \"mhealth\" OR (internet of things in healthcare) OR \"medical device integration\" OR \"internet of medical things\" OR \"smart hospitals\" OR \"ai in healthcare\" OR \"real-time health tracking\" OR \"healthcare interoperability\" OR \n((\"chronic disease management\" OR \"health monitoring systems\" OR \"population health management\" OR \"wearable devices\" OR \"connected health\" OR \"digital health\" OR \"interoperability\" OR \"electronic health records\" OR \"patient engagement\" OR \"telemedicine\" OR \"virtual health\" OR \"personalized medicine\" OR \"remote patient monitoring\" OR \"health information exchange\" OR \"predictive analytics\" OR \"secure health data\" OR \"digital therapeutics\" OR \"health data analytics\" OR \"healthcare automation\") AND (IoT))"
+    },
+    {
+        "baseline": "Energy Growth Nexus",
+        "predicted": "\"bioenergy\" OR \"decarbonization\" OR (energy growth nexus)"
+    }
+]
