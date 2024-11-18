@@ -7,7 +7,7 @@ import json
 
 # Reevaluate the queries and update the results.xlsx file
 if __name__ == "__main__":
-    for query in tqdm(json.load(open("queries.json"))):
+    for query in tqdm(json.load(open("data/queries.json"))):
         baseline = query["baseline"]
         predicted = query["predicted"]
         data = get_data(baseline, predicted)
