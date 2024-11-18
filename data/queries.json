@@ -75,5 +75,10 @@
     {
         "baseline":"Multicore Performance Prediction",
         "predicted":" ((\"Parallel Programming\") AND Modeling) OR (Multicore AND (Modeling OR \"Software Engineering\")) OR (Multicore AND (\"Parallel Programming\")) AND         (\"Modeling\" OR \"Software Engineering\")"
+    },
+    {
+        "baseline":"Cloud Migration",
+        "predicted":"((migration OR evolution OR adaptation OR transformation OR modernization OR reengineering OR integration OR adoption OR switching) AND (monolithic OR legacy OR existing OR preexisting OR on-premise) AND (system OR software OR application) AND (cloud AND (software OR application OR architecture OR infrastructure OR cloud environment)))"
+
     }
 ]
