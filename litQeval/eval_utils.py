@@ -40,7 +40,7 @@ def recall(core: list, predicted: list) -> float:
     return intersection / len(core)
 
 
-def format_search_query(query: str, slr: bool):
+def format_search_query(query: str, full_data: bool):
     """
     Formats a given boolean query to be used in the Dimensions API
 
@@ -48,8 +48,8 @@ def format_search_query(query: str, slr: bool):
     ----------
     query: str
         The query to be formatted
-    slr: bool
-        Indicates if the query is from the SLR dataset (search full data and only for IEEE)
+    full_data: bool
+        Indicates if the full data should be searched instead of just the title and abstract
 
     Returns
     -------
@@ -57,8 +57,8 @@ def format_search_query(query: str, slr: bool):
         The formatted query for the Dimensions API
     """
     query = query.replace('"', '\\"')
-    if slr:
-        query = f"""search publications in full_data for "{query}" where publisher="Institute of Electrical and Electronics Engineers (IEEE)" return publications[id+title+abstract]"""
+    if full_data:
+        query = f"""search publications in full_data for "{query}" return publications[id+title+abstract]"""
     else:
         query = f"""search publications in title_abstract_only for "{query}" return publications[id+title+abstract]"""
     return query
@@ -84,7 +84,7 @@ def execute_query(query: str) -> pd.DataFrame:
     return response.as_dataframe()
 
 
-def get_pubs(query: str, slr: bool) -> pd.DataFrame:
+def get_pubs(query: str, full_data: bool) -> pd.DataFrame:
     """
     Retrieve the publications for a given query
 
@@ -92,8 +92,9 @@ def get_pubs(query: str, slr: bool) -> pd.DataFrame:
     ----------
     query: str
         The query to retrieve publications
-    slr: bool
-        Indicates if the query is from the SLR dataset (search full data and only for IEEE)
+    full_data: bool
+        Indicates if the full data should be searched instead of just the title and abstract
+
 
 
     Returns
@@ -101,7 +102,7 @@ def get_pubs(query: str, slr: bool) -> pd.DataFrame:
     results: pd.DataFrame
         The publications retrieved for the given query
     """
-    query = format_search_query(query, slr)
+    query = format_search_query(query, full_data)
     results = execute_query(query)
 
     print(f"Total results: {len(results)}")
@@ -196,7 +197,7 @@ def get_core_dataset(topic: str) -> tuple[list, np.ndarray]:
     return core_pubs.tolist(), np.squeeze(embeddings)
 
 
-def get_data(base_query: str, predicted_query: str, slr=False) -> dict:
+def get_data(base_query: str, predicted_query: str, full_data=False) -> dict:
     """
     Retrieves and organizes publication and embedding data for a specified topic.
 
@@ -207,8 +208,8 @@ def get_data(base_query: str, predicted_query: str, slr=False) -> dict:
     predicted_query : str
         The predicted query to retrieve data for.
     slr : bool, optional
-        Indicates if the data is from the SLR dataset, by default False.
-
+        Indicates if the full data should be searched instead of just the title and abstract, by default False.
+        
     Returns
     -------
     dict
@@ -237,7 +238,7 @@ def get_data(base_query: str, predicted_query: str, slr=False) -> dict:
     if predicted_path.exists():
         predicted_pubs = pd.read_csv(predicted_path)
     else:
-        predicted_pubs = get_pubs(predicted_query, slr)
+        predicted_pubs = get_pubs(predicted_query, full_data)
         predicted_pubs.to_csv(predicted_path, index=False)
 
     # Retrieve or compute baseline vector store embeddings
