@@ -1,6 +1,0 @@
-- SLR 6 is omitted becasue the results through abstract and title search are 152,317, whereby in the original work the search query was limited to only Journal of
-Visual Languages and Computing (JVLC)
-- SLR 5 is ommitted because the query returns 60k results when using the default appraoch, whereby in the original work they limited to scope for the category of computer
-science only, which also returned 14k
-- SLR 2 ~200k despite searching only using the title and abstract
-- SLR 1 the survey is not available on Dimensions
