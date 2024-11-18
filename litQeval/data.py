@@ -112,10 +112,8 @@ def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(data)[attirbutes]
 
-def download():
+if __name__ == "__main__":
     df = jabref_to_excel()
     metadata = extract_metadata(df)
     metadata.to_excel("./data/metadata.xlsx", index=False)
     df.to_excel("./data/core_publications.xlsx", index=False)
-    
-download()

@@ -62,11 +62,11 @@
     },
     {
         "baseline": "Software Process Line",
-        "predicted": "(\"process adaptation\" OR \"processes adaptation\" OR \"customization of processes\" OR \"software processes customization\" OR \"software process customization\" OR \"customizing software processes\" OR \"process definition\" OR \"processes definition\" OR \"process composition\" OR \"compose processes\" OR \"processes composition\" OR \"process tailoring\" OR \"processes tailoring\" OR \"tailing of processes\" OR \"process development\" OR \"processes development\" OR \"process engineering\" OR \"processes engineering\" OR \"process design\" OR \"software process modelling\" OR \"software process modelling\" OR \"process implementation\" OR \"managing processes\")\n\nAND\n\n(\"family of software process\" OR \"family of software processes\" OR \"families of software process\" OR \"families of software processes\" OR \"software process line\" OR \"software process lines\" OR \"software processes line\" OR \"software processes lines\" OR \"process-line\" OR \"process-lines\" OR \"processes-line\" OR \"processes-lines\" OR \"software process family\" OR \"software processes family\" OR \"software process families\" OR \"software processes families\" OR \"process-family\" OR \"processes-family\" OR \"process-families\" OR \"processes-families\" OR \"software process variability\" OR \"software process variabilities\" OR \"software processes variability\" OR \"software processes variabilities\" OR \"variabilities in software processes\" OR \"process domain engineering\" OR \"processes domain engineering\" OR \"process feature\" OR \"process features\" OR \"processes feature\" OR \"processes features\" OR \"process asset reuse\")"
+        "predicted": "(\"process adaptation\" OR \"processes adaptation\" OR \"customization of processes\" OR \"software processes customization\" OR \"software process customization\" OR \"customizing software processes\" OR \"process definition\" OR \"processes definition\" OR \"process composition\" OR \"compose processes\" OR \"processes composition\" OR \"process tailoring\" OR \"processes tailoring\" OR \"tailing of processes\" OR \"process development\" OR \"processes development\" OR \"process engineering\" OR \"processes engineering\" OR \"process design\" OR \"software process modelling\" OR \"software process modelling\" OR \"process implementation\" OR \"managing processes\") AND (\"family of software process\" OR \"family of software processes\" OR \"families of software process\" OR \"families of software processes\" OR \"software process line\" OR \"software process lines\" OR \"software processes line\" OR \"software processes lines\" OR \"process-line\" OR \"process-lines\" OR \"processes-line\" OR \"processes-lines\" OR \"software process family\" OR \"software processes family\" OR \"software process families\" OR \"software processes families\" OR \"process-family\" OR \"processes-family\" OR \"process-families\" OR \"processes-families\" OR \"software process variability\" OR \"software process variabilities\" OR \"software processes variability\" OR \"software processes variabilities\" OR \"variabilities in software processes\" OR \"process domain engineering\" OR \"processes domain engineering\" OR \"process feature\" OR \"process features\" OR \"processes feature\" OR \"processes features\" OR \"process asset reuse\")"
     },
     {
         "baseline":"Data Stream Processing Latency",
-        "predicted":"(\"stream processing\" OR \"continuous query\" OR \"stream-based system\" OR \n\"data stream system OR \"streaming system\" OR \"complex event processing\") \nAND (\"adapt\" OR \"reconfigur\" )\n AND(\"latency\" OR \"response time\")"
+        "predicted":"(stream processing OR \"continuous query\" OR \"stream-based system\" OR \"data stream system\" OR \"streaming system\" OR \"complex event processing\") AND (\"adapt\" OR \"reconfigur\" ) AND (\"latency\" OR \"response time\")"
     },
     {
         "baseline":"Business Process Meta Models",
@@ -74,11 +74,19 @@
     },
     {
         "baseline":"Multicore Performance Prediction",
-        "predicted":" ((\"Parallel Programming\") AND Modeling) OR (Multicore AND (Modeling OR \"Software Engineering\")) OR (Multicore AND (\"Parallel Programming\")) AND         (\"Modeling\" OR \"Software Engineering\")"
+        "predicted":" ((\"Parallel Programming\") AND Modeling) OR (Multicore AND (Modeling OR \"Software Engineering\")) OR (Multicore AND (\"Parallel Programming\")) AND (\"Modeling\" OR \"Software Engineering\")"
     },
     {
         "baseline":"Cloud Migration",
         "predicted":"((migration OR evolution OR adaptation OR transformation OR modernization OR reengineering OR integration OR adoption OR switching) AND (monolithic OR legacy OR existing OR preexisting OR on-premise) AND (system OR software OR application) AND (cloud AND (software OR application OR architecture OR infrastructure OR cloud environment)))"
 
+    },
+    {
+        "baseline":"Software Fault Prediction Metrics",
+        "predicted":"software AND (metric OR measurement) AND (fault OR defect* OR quality OR error-prone) AND (predict* OR prone* OR probability OR assess* OR detect* OR estimat* OR classificat*)"
+    },
+    {
+        "baseline":"Software Defect Prediction",
+        "predicted":"(software OR applicati* OR systems ) AND (fault* OR defect* OR quality OR error-prone) AND (predict*OR prone* OR probability OR assess* OR detect* OR estimat* OR classificat*)"
     }
 ]
