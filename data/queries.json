@@ -71,5 +71,9 @@
     {
         "baseline":"Business Process Meta Models",
         "predicted":"(\"metamodel\" OR \"meta-model\") AND (\"business process\" OR \"process model\" OR \"petrinet\" OR \"petri-net\" OR \"workflow\" OR \"Declare\")"
+    },
+    {
+        "baseline":"Multicore Performance Prediction",
+        "predicted":" ((\"Parallel Programming\") AND Modeling) OR (Multicore AND (Modeling OR \"Software Engineering\")) OR (Multicore AND (\"Parallel Programming\")) AND         (\"Modeling\" OR \"Software Engineering\")"
     }
 ]

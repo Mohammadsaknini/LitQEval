@@ -9789,6 +9789,468 @@ Conclusions: Research on robotic arthroplasty is rapidly growing and originates 
   url       = {https://app.dimensions.ai/details/publication/pub.1099323867},
 }
 
+@InProceedings{Frank2017,
+  author    = {Frank, Markus and Hilbrich, Marcus and Lehrig, Sebastian and Becker, Steffen},
+  booktitle = {2017 IEEE 7th International Symposium on Cloud and Service Computing (SC2)},
+  title     = {Parallelization, Modeling, and Performance Prediction in the Multi-/Many Core Area: A Systematic Literature Review},
+  year      = {2017},
+  pages     = {48-55},
+  abstract  = {Context: Software developers face complex, connected, and large software projects. The development of such systems involves design decisions that directly impact the quality of the software. For an early decision making, software developers can use model-based prediction approaches for (non-)functional quality properties. Unfortunately, the accuracy of these approaches is challenged by newly introduced hardware features like multiple cores within a single CPU (multicores) and their dependence on shared memory and other shared resources. Objectives: Our goal is to understand whether and how existing model-based performance prediction approaches face this challenge. We plan to use gained insights as foundation for enriching existing prediction approaches with capabilities to predict systems running on multicores. Methods: We perform a Systematic Literature Review (SLR) to identify current model-based prediction approaches in the context of multicores. Results: Our SLR covers the software engineering, embedded systems, High Performance Computing, and Software Performance Engineering domains for which we examined 34 sources in detail. We found various performance prediction approaches which tries to increase prediction accuracy for multicore systems by including shared memory designs to the prediction models. Conclusion: However, our results show that the memory designs models are only in an initial phase. Further research has to be done to improve cache, memory, and memory bandwidth model as well as to include auto tuner support.},
+  doi       = {10.1109/sc2.2017.15},
+  groups    = {Multicore Performance Prediction},
+  priority  = {prio1},
+  url       = {https://app.dimensions.ai/details/publication/pub.1101547396},
+}
+
+@InProceedings{Saad2019,
+  author    = {Saad, Abdallah and El-Mahdy, Ahmed and El-Shishiny, Hisham},
+  booktitle = {Proceedings of the Rapid Simulation and Performance Evaluation: Methods and Tools},
+  title     = {Performance Modeling of MPI-based Applications on Cloud Multicore Servers},
+  year      = {2019},
+  pages     = {1-6},
+  abstract  = {While cloud computing is widely adopted in many application domains, it is not yet the case for the high performance computing (HPC) domain. HPC traditionally runs on homogeneous, high-cost servers with fast networking providing for predictable performance; while bare-metal cloud offerings is promising, the underlying hardware is heterogeneous, with slower network connection, making it difficult to predict performance and hence tune applications. In this paper we consider performance modelling message passing interface (MPI)-based applications, being a major class of HPC applications. In particular, we present a queueing network performance model to account for computation and communication contentions on the underlying heterogeneous, relatively slow-interconnect architecture of the cloud bare-metal servers. The proposed model uses a non-linear problem solver to enhance the parameters acquired by profiling. We utilise our model to conduct an initial study of the performance of two benchmarks from SPECMPI-2007 suite and two NASA Parallel kernels, executing on a small cluster with varying number of multicore servers ranging from 2 to 8. Comparing the predicted and actual execution times of workloads with different number of processes shows 86% average accuracy for the benchmarks used.},
+  doi       = {10.1145/3300189.3300194},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1116305779},
+}
+
+@InBook{Ipek2005,
+  author    = {Ipek, Engin and de Supinski, Bronis R. and Schulz, Martin and McKee, Sally A.},
+  pages     = {196-205},
+  title     = {An Approach to Performance Prediction for Parallel Applications},
+  year      = {2005},
+  note      = {https://link.springer.com/content/pdf/10.1007/11549468_24.pdf},
+  abstract  = {Accurately modeling and predicting performance for large-scale applications becomes increasingly difficult as system complexity scales dramatically. Analytic predictive models are useful, but are difficult to construct, usually limited in scope, and often fail to capture subtle interactions between architecture and software. In contrast, we employ multilayer neural networks trained on input data from executions on the target platform. This approach is useful for predicting many aspects of performance, and it captures full system complexity. Our models are developed automatically from the training input set, avoiding the difficult and potentially error-prone process required to develop analytic models. This study focuses on the high-performance, parallel application SMG2000, a much studied code whose variations in execution times are still not well understood. Our model predicts performance on two large-scale parallel platforms within 5%-7% error across a large, multi-dimensional parameter space.},
+  booktitle = {Euro-Par 2005 Parallel Processing},
+  doi       = {10.1007/11549468_24},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1029836641},
+}
+
+@InProceedings{Pllana2005,
+  author    = {Pllana, Sabri and Fahringer, Thomas},
+  booktitle = {2005 International Conference on Parallel Processing Workshops (ICPPW'05)},
+  title     = {Performance Prophet: A Performance Modeling and Prediction Tool for Parallel and Distributed Programs},
+  year      = {2005},
+  pages     = {509-516},
+  abstract  = {High-performance computing is essential for solving large problems and for reducing the time to solution for a single problem. Current top high-performance computing systems contain 1000's of processors. Therefore, new tools are needed to support the program development that will exploit high degrees of parallelism. The issue of model-based performance evaluation of real world programs on large scale systems is addressed in this paper. We present the PerformanceProphet, which is a performance modeling and prediction tool for parallel and distributed programs. One of the main contributions of this paper is our methodology for reducing the time needed to evaluate the model. In addition, we describe our method for automatic performance model generation. We have implemented Performan-ceProphet in Java and C++. We illustrate our approach by modeling and simulating a real-world material science parallel program.},
+  doi       = {10.1109/icppw.2005.72},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094447170},
+}
+
+@Article{Pankratius2009,
+  author   = {Pankratius, V. and Jannesari, A. and Tichy, W.F.},
+  journal  = {IEEE Software},
+  title    = {Parallelizing Bzip2: A Case Study in Multicore Software Engineering},
+  year     = {2009},
+  note     = {https://publikationen.bibliothek.kit.edu/1000009973/614524},
+  number   = {6},
+  pages    = {70-77},
+  volume   = {26},
+  abstract = {We conducted a case study of parallelizing a real program for multicore computers using currently available libraries and tools. We selected the sequential Bzip2 compression program for the study because it's a computing-intensive, widely used, and relevant application in everyday life. Its source code is available, and its algorithm is well documented. In addition, the algorithm is non-trivial, but, with 8,000 LOC, the application is small enough to manage in a course.},
+  doi      = {10.1109/ms.2009.183},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1061421075},
+}
+
+@Article{Hwu2008,
+  author   = {Hwu, Wen-mei and Keutzer, K. and Mattson, T.G.},
+  journal  = {IEEE Design and Test},
+  title    = {The Concurrency Challenge},
+  year     = {2008},
+  number   = {4},
+  pages    = {312-320},
+  volume   = {25},
+  abstract = {The evolutionary path of microprocessor design includes both multicore and many-core architectures. Harnessing the most computing throughput from these architectures requires concurrent or parallel execution of instructions. The authors describe the challenges facing the industry as parallel-computing platforms become even more widely available.},
+  doi      = {10.1109/mdt.2008.110},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1061399768},
+}
+
+@Article{Haller2009,
+  author   = {Haller, Philipp and Odersky, Martin},
+  journal  = {Theoretical Computer Science},
+  title    = {Scala Actors: Unifying thread-based and event-based programming},
+  year     = {2009},
+  note     = {https://doi.org/10.1016/j.tcs.2008.09.019},
+  number   = {2-3},
+  pages    = {202-220},
+  volume   = {410},
+  abstract = {There is an impedance mismatch between message-passing concurrency and virtual machines, such as the JVM. VMs usually map their threads to heavyweight OS processes. Without a lightweight process abstraction, users are often forced to write parts of concurrent applications in an event-driven style which obscures control flow, and increases the burden on the programmer.In this paper we show how thread-based and event-based programming can be unified under a single actor abstraction. Using advanced abstraction mechanisms of the Scala programming language, we implement our approach on unmodified JVMs. Our programming model integrates well with the threading model of the underlying VM.},
+  doi      = {10.1016/j.tcs.2008.09.019},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1036049428},
+}
+
+@Article{Cerotti2015,
+  author   = {Cerotti, D. and Gribaudo, M. and Iacono, M. and Piazzolla, P.},
+  journal  = {Concurrency and Computation Practice and Experience},
+  title    = {Modeling and analysis of performances for concurrent multithread applications on multicore and graphics processing unit systems},
+  year     = {2015},
+  number   = {2},
+  pages    = {438-452},
+  volume   = {28},
+  abstract = {Summary The capabilities of multicore processors lead them to be widely adopted in systems at any scale, since their are able to provide more computing power at a lower consumption and dissipation cost. System designers are challenged to a deeper understanding of multicore functioning in order to fully exploit them while keeping the optimal balance between cores utilization and optimal throughput, response time and energy usage. Besides the advancement of general purpose CPUs, the same technological evolution leads to the rise of GPUs, dramatic evolution of graphical coprocessors, that are now affordable, efficient, dedicated computing units, capable of parallel computing and equipped with facilities that make them suited for supporting the main CPU of a system in running ordinary applications. The availability of commercial off‐the‐shelf (COTS) multicore computers, eventually equipped with one or more GPUs, makes them the basic building block of data centers devoted to cloud applications or scientific computing. The way to optimal exploitation of such a wide amount of computing power passes through the ability of matching the best scheduling of hardware resources with the software characteristics of the applications. This requires appropriate models and evaluation methods. Simulation and analytical techniques are essential tools to support the design and the management process of such architectures, but a sound characterization of the workloads is required. Typical workloads consist in multithreaded applications, with different characteristics, that dynamically span over the cores of multiple machines, connected by fast networks. In this paper we propose several parametric performance models for different configurations of multicore machines, with or without GPU support, running multiple class multithreaded applications, aiming to supply a detailed modeling help for complex data centers. Copyright © 2015 John Wiley & Sons, Ltd.},
+  doi      = {10.1002/cpe.3504},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1004373119},
+}
+
+@InBook{Aldinucci2017,
+  author    = {Aldinucci, Marco and Danelutto, Marco and Kilpatrick, Peter and Torquati, Massimo},
+  pages     = {261-280},
+  title     = {Fastflow: High‐Level and Efficient Streaming on Multicore},
+  year      = {2017},
+  note      = {https://iris.unito.it/bitstream/2318/1518646/1/2012_ff_wileybook_chap13.pdf},
+  abstract  = {This chapter first outlines FastFlow design and then shows sample use of the FastFlow programming environment together with performance results achieved on various state‐of‐the‐art multicore architectures. The FastFlow framework has been designed according to four foundational principles: layered design; efficiency in base mechanisms; support for stream parallelism; and a programming model based on design pattern/algorithmic skeleton concepts. The core of the FastFlow framework provides an efficient implementation of single‐producer‐single‐consumer (SPSC) first in‐first out (FIFO) queues. The next tier up extends from one‐to‐one queues to one‐to‐many, many‐to‐one, and many‐to‐many synchronizations and data flows, which are implemented using only SPSC queues and arbiter threads, thus providing lock‐free and wait‐free arbitrary dataflow graphs. When designing and implementing new parallel applications using FastFlow, programmers instantiate patterns provided by FastFlow to adapt them to the specific needs of the application at hand. The chapter demonstrates how the principal FastFlow patterns may be used in a parallel application.},
+  booktitle = {Programming multi‐core and many‐core computing systems},
+  doi       = {10.1002/9781119332015.ch13},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1074245157},
+}
+
+@InProceedings{Escobar2016,
+  author    = {Escobar, Rodrigo and Boppana, Rajendra V.},
+  booktitle = {2016 IEEE 23rd International Conference on High Performance Computing (HiPC)},
+  title     = {Performance Prediction of Parallel Applications Based on Small-Scale Executions},
+  year      = {2016},
+  pages     = {362-371},
+  abstract  = {Predicting the execution time of parallel applications in High Performance Computing (HPC) clusters has served different objectives, including helping developers to find relevant areas of code that require fine tuning, designing better job schedulers to increase clusters' utilization, and detecting system bottlenecks. We present a statistical approach to predict parallel application execution times using empirical analyses of the application execution times for small input sizes and the time spent on various phases of execution. We model the execution time of each phase an application by selecting a suitable kernel from a collection of well known benchmark kernels. To predict the application execution time for a larger input, the matching kernels are used to estimate the execution times for the major phases of the application, and a regression approach is then used to estimate the overall execution time. Prior approaches required determination of application's characteristics by extracting instruction traces, instrumenting the application code for time stamps, static code analysis, or creation of accurate simulation models. In contrast, our approach requires a few short executions (each taking less than 50 seconds) of the application to collect runtime profile data that are used to match application phases to kernels using statistical analyses and produce accurate execution time predictions for parallel scientific applications. We evaluate our methodology using three well known parallel scientific applications: SMG2000, SNAP and HPCG. Our prediction errors range from 1% to 15%.},
+  doi       = {10.1109/hipc.2016.049},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094223098},
+}
+
+@Article{Massingill2006,
+  author   = {Massingill, Berna L. and Mattson, Timothy G. and Sanders, Beverly A.},
+  journal  = {Concurrency and Computation Practice and Experience},
+  title    = {Reengineering for Parallelism: an entry point into PLPP for legacy applications},
+  year     = {2006},
+  number   = {4},
+  pages    = {503-529},
+  volume   = {19},
+  abstract = {Abstract  Many parallel programs begin as legacy sequential code that is later reengineered to take advantage of parallel hardware. This paper presents a pattern called Reengineering for Parallelism to help with this task. The new pattern is intended to be used in conjunction with PLPP (Pattern Language for Parallel Programming), described in our book (Mattson TG, Sanders BA, Massingill BL. Patterns for Parallel Programming . Addison‐Wesley: Reading, MA, 2004). PLPP contains a structured collection of patterns and embodies a methodology for developing parallel programs in which the programmer starts with a good understanding of the problem, works through a sequence of patterns, and finally ends up with the code. Most of the patterns in PLPP are also applicable when reengineering legacy code, but it is not always clear how to get started. Reengineering for Parallelism provides an alternate point of entry into PLPP and addresses particular issues that arise when dealing with legacy code. Copyright © 2006 John Wiley & Sons, Ltd.},
+  doi      = {10.1002/cpe.1147},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1021257745},
+}
+
+@InProceedings{Pankratius2008,
+  author    = {Pankratius, Victor and Schaefer, Christoph and Jannesari, Ali and Tichy, Walter F.},
+  booktitle = {Proceedings of the 1st international workshop on Multicore software engineering},
+  title     = {Software engineering for multicore systems},
+  year      = {2008},
+  pages     = {53-60},
+  abstract  = {The emergence of inexpensive parallel computers powered by multicore chips combined with stagnating clock rates raises new challenges for software engineering. As future performance improvements will not come "for free" from increased clock rates, performance critical applications will need to be parallelized. However, little is known about the engineering principles for parallel general-purpose applications. This paper presents an experience report with four diverse case studies on multicore software development for general-purpose applications. They were programmed in different languages and benchmarked on several multicore computers. Empirical findings include: 1) Multicore computers deliver: Real speedups are achievable, albeit with significant programming effort and speedups that are typically lower than the number of cores employed; 2) Massive refactoring of sequential programs is required, sometimes at several levels. Special tools for parallelization refactorings appear to be an important area of research; 3) Autotuning is indispensable, as manually tuning thread assignment, number of pipeline stages, size of data partitions and other parameters is difficult and error prone; 4) Architectures that encompass several parallel components are poorly understood. Tuneable architectural patterns with parallelism at several levels need to be discovered.},
+  doi       = {10.1145/1370082.1370096},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1041687543},
+}
+
+@Article{Asanovic2009,
+  author   = {Asanovic, Krste and Bodik, Rastislav and Demmel, James and Keaveny, Tony and Keutzer, Kurt and Kubiatowicz, John and Morgan, Nelson and Patterson, David and Sen, Koushik and Wawrzynek, John and Wessel, David and Yelick, Katherine},
+  journal  = {Communications of the ACM},
+  title    = {A view of the parallel computing landscape},
+  year     = {2009},
+  note     = {https://dl.acm.org/doi/pdf/10.1145/1562764.1562783},
+  number   = {10},
+  pages    = {56-67},
+  volume   = {52},
+  abstract = {Writing programs that scale with increasing numbers of cores should be as easy as writing programs for sequential computers.},
+  doi      = {10.1145/1562764.1562783},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1027518140},
+}
+
+@Article{Mehrara2009,
+  author   = {Mehrara, M. and Jablin, T. and Upton, D. and August, D. and Hazelwood, K. and Mahlke, S.},
+  journal  = {IEEE Signal Processing Magazine},
+  title    = {Multicore compilation strategies and challenges},
+  year     = {2009},
+  number   = {6},
+  pages    = {55-63},
+  volume   = {26},
+  abstract = {To overcome challenges stemming from high power densities and thermal hot spots in microprocessors, multicore computing platforms have emerged as the ubiquitous computing platform from servers down through embedded systems. Unfortunately, providing multiple cores does not directly translate into increased performance or better energy efficiency for most applications. The burden is placed on software developers and tools to find and exploit coarse-grain parallelism to effectively make use of the abundance of computing resources provided by these systems. Concurrent applications are much more complex to develop than their single-threaded ancestors, thus software development tools will be critical to help programmers create both high performance and correct software. This article provides an overview of parallelism and compiler technology to help the community understand the software development challenges and opportunities for multicore signal processors.},
+  doi      = {10.1109/msp.2009.934117},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1061423303},
+}
+
+@InProceedings{Otto2009,
+  author    = {Otto, Frank and Pankratius, Victor and Tichy, Walter F.},
+  booktitle = {2009 31st International Conference on Software Engineering - Companion Volume},
+  title     = {High-Level Multicore Programming with XJava},
+  year      = {2009},
+  pages     = {319-322},
+  abstract  = {Multicore chips are becoming mainstream, but programming them is difficult because the prevalent thread-based programming model is error-prone and does not scale well. To address this problem, we designed XJava, an extension of Java that permits the direct expression of producer/consumer, pipeline, master/slave, and data parallelism. The central concept of the extension is the task, a parallel activity similar to a filter in Unix. Tasks can be combined with new operators to create arbitrary nestings of parallel activities. Preliminary experience with XJava and its compiler suggests that the extensions lead to code savings and reduce the potential for synchronization defects, while preserving the advantages of object-orientation and type-safety. The proposed extensions provide intuitive “what-you-see-is-what-you-gety” parallelism. They also enable other software tools, such as auto-tuning and accurate static analysis for race detection.},
+  doi       = {10.1109/icse-companion.2009.5071011},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094231277},
+}
+
+@InBook{Stuermer2009,
+  author    = {Stürmer, Markus and Wellein, Gerhard and Hager, Georg and Köstler, Harald and Rüde, Ulrich},
+  pages     = {551-566},
+  title     = {Challenges and Potentials of Emerging Multicore Architectures},
+  year      = {2009},
+  abstract  = {We present performance results on two current multicore architectures, a STI (Sony, Toshiba, and IBM) Cell processor included in the new Playstation™ 3 and a Sun UltraSPARC T2 (“Niagara 2”) machine. On the Niagara 2 we analyze typical performance patterns that emerge from the peculiar way the memory controllers are activated on this chip using the standard STREAM benchmark and a shared-memory parallel lattice Boltzmann code. On the Cell processor we measure the memory bandwidth and run performance tests for LBM simulations. Additionally, we show results for an application in image processing on the Cell processor, where it is required to solve nonlinear anisotropic PDEs.},
+  booktitle = {High Performance Computing in Science and Engineering, Garching/Munich 2007},
+  doi       = {10.1007/978-3-540-69182-2_43},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1053016373},
+}
+
+@InProceedings{Brown2010,
+  author    = {Brown, Richard and Shoop, Elizabeth and Adams, Joel and Clifton, Curtis and Gardner, Mark and Haupt, Michael and Hinsbeeck, Peter},
+  booktitle = {Proceedings of the 2010 ITiCSE working group reports},
+  title     = {Strategies for preparing computer science students for the multicore world},
+  year      = {2010},
+  note      = {http://synergy.cs.vt.edu/pubs/papers/brown-iticse10-cs-education-multicore.pdf},
+  pages     = {97-115},
+  abstract  = {Multicore computers have become standard, and the number of cores per computer is rising rapidly. How does the new demand for understanding of parallel computing impact computer science education? In this paper, we examine several aspects of this question: (i) What parallelism body of knowledge do today's students need to learn? (ii) How might these concepts and practices be incorporated into the computer science curriculum? (iii) What resources will support computer science educators, including non-specialists, to teach parallel computing? (iv) What systemic obstacles impede this change, and how might they be overcome? We address these concerns as an initial framework for responding to the urgent challenge of injecting parallelism into computer science curricula},
+  doi       = {10.1145/1971681.1971689},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1016245318},
+}
+
+@InProceedings{Eyerman2010,
+  author    = {Eyerman, Stijn and Eeckhout, Lieven},
+  booktitle = {Proceedings of the 37th annual international symposium on Computer architecture},
+  title     = {Modeling critical sections in Amdahl&#x27;s law and its implications for multicore design},
+  year      = {2010},
+  pages     = {362-370},
+  abstract  = {This paper presents a fundamental law for parallel performance: it shows that parallel performance is not only limited by sequential code (as suggested by Amdahl's law) but is also fundamentally limited by synchronization through critical sections. Extending Amdahl's software model to include critical sections, we derive the surprising result that the impact of critical sections on parallel performance can be modeled as a completely sequential part and a completely parallel part. The sequential part is determined by the probability for entering a critical section and the contention probability (i.e., multiple threads wanting to enter the same critical section). This fundamental result reveals at least three important insights for multicore design. (i) Asymmetric multicore processors deliver less performance benefits relative to symmetric processors than suggested by Amdahl's law, and in some cases even worse performance. (ii) Amdahl's law suggests many tiny cores for optimum performance in asymmetric processors, however, we find that fewer but larger small cores can yield substantially better performance. (iii) Executing critical sections on the big core can yield substantial speedups, however, performance is sensitive to the accuracy of the critical section contention predictor.},
+  doi       = {10.1145/1815961.1816011},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1031284348},
+}
+
+@InProceedings{Schaefer2010,
+  author    = {Schaefer, Christoph A. and Pankratius, Victor and Tichy, Walter F.},
+  booktitle = {Proceedings of the 32nd ACM/IEEE International Conference on Software Engineering - Volume 1},
+  title     = {Engineering parallel applications with tunable architectures},
+  year      = {2010},
+  pages     = {405-414},
+  abstract  = {Current multicore computers differ in many hardware characteristics. Software developers thus hand-tune their parallel programs for a specific platform to achieve the best performance; this is tedious and leads to non-portable code. Although the software architecture also requires adaptation to achieve best performance, it is rarely modified because of the additional implementation effort. The Tunable Architectures approach proposed in this paper automates the architecture adaptation of parallel programs and uses an auto-tuner to find the best-performing software architecture for a particular machine. We introduce a new architecture description language based on parallel patterns and a framework to express architecture variants in a generic way. Several case studies demonstrate significant performance improvements due to architecture tuning and show the applicability of our approach to industrial applications. Software developers are exposed to less parallel programming complexity, thus making the approach attractive for experts as well as inexperienced parallel programmers.},
+  doi       = {10.1145/1806799.1806859},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1037936517},
+}
+
+@InBook{Karcher2011,
+  author    = {Karcher, Thomas and Pankratius, Victor},
+  pages     = {3-14},
+  title     = {Run-Time Automatic Performance Tuning for Multicore Applications},
+  year      = {2011},
+  note      = {https://link.springer.com/content/pdf/10.1007/978-3-642-23400-2_2.pdf},
+  abstract  = {Multicore hardware and system software have become complex and differ from platform to platform. Parallel application performance optimization and portability are now a real challenge. In practice, the effects of tuning parameters are hard to predict. Programmers face even more difficulties when several applications run in parallel and influence each other indirectly. We tackle these problems with Perpetuum, a novel operating-system-based auto-tuner that is capable of tuning applications while they are running. We go beyond tuning one application in isolation and are the first to employ OS-based auto-tuning to improve system-wide application performance. Our fully functional auto-tuner extends the Linux kernel, and the application tuning process does not require any user involvement. General multicore applications are automatically re-tuned on new platforms while they are executing, which makes portability easy. Extensive case studies with real applications demonstrate the feasibility and efficiency of our approach. Perpetuum realizes a first milestone in our vision to make every performance-critical multicore application auto-tuned by default.},
+  booktitle = {Euro-Par 2011 Parallel Processing},
+  doi       = {10.1007/978-3-642-23400-2_2},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1039682850},
+}
+
+@InProceedings{Pankratius2011,
+  author    = {Pankratius, Victor and Heneka, Martin},
+  booktitle = {2011 International Conference on Parallel Processing},
+  title     = {Moving Database Systems to Multicore: An Auto- Tuning Approach},
+  year      = {2011},
+  pages     = {582-591},
+  abstract  = {In the multicore era, database systems are facing new challenges to exploit parallelism and scale query performance on new processors. Taking advantage of multicore, however, is not trivial and goes far beyond inserting parallel constructs into available database system code. Varying hardware characteristics require different query parallelization strategies on each multicore platform. Query optimizers at the heart of each database system have to be reengineered, but the problem is that these optimizers are complex. In addition, optimization best practices evolved during a long-term process of research and experimentation. This paper presents a successful modular technique that does not require a major rewrite of database code from scratch. We discuss the implementation details of new fine-granular parallelism approach that can be used as an add-on to existing systems and other query optimizations. We start with query execution plans that are generated by sequential optimizers. Using multithreading, we exploit parallelism within queries and within join operators, which leverages the new performance opportunities in modern multicore hardware. Our query performance optimization is adaptive and employs QJetpack, a feedback-directed auto-tuner, in a novel way. It iteratively partitions query execution plans by detecting performance patterns that are pre-benchmarked on each platform. Then, the auto-tuner steers the application of parallel transformations based on query run-time feedback. This paper focuses on difficult scenarios with I/O-intensive join queries and shows that we can speed up query execution despite significant I/O limitations. The performance of all benchmarked queries could be improved, with low tuning overhead, on all of our multicore platforms.},
+  doi       = {10.1109/icpp.2011.24},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095570190},
+}
+
+@InProceedings{Pankratius2011a,
+  author    = {Pankratius, Victor},
+  booktitle = {Proceedings of the 33rd International Conference on Software Engineering},
+  title     = {Automated usability evaluation of parallel programming constructs (NIER track)},
+  year      = {2011},
+  pages     = {936-939},
+  abstract  = {Multicore computers are ubiquitous, and proposals to extend existing languages with parallel constructs mushroom. While everyone claims to make parallel programming easier and less error-prone, empirical language usability evaluations are rarely done in-the-field with many users and real programs. Key obstacles are costs and a lack of appropriate environments to gather enough data for representative conclusions. This paper discusses the idea of automating the usability evaluation of parallel language constructs by gathering subjective and objective data directly in every software engineer's IDE. The paper presents an Eclipse prototype suite that can aggregate such data from potentially hundreds of thousands of programmers. Mismatch detection in subjective and objective feedback as well as construct usage mining can improve language design at an early stage, thus reducing the risk of developing and maintaining inappropriate constructs. New research directions arising from this idea are outlined for software repository mining, debugging, and software economics.},
+  doi       = {10.1145/1985793.1985951},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1027165238},
+}
+
+@InProceedings{Zwinkau2012,
+  author    = {Zwinkau, Andreas and Pankratius, Victor},
+  booktitle = {2012 IEEE 18th International Conference on Parallel and Distributed Systems},
+  title     = {AutoTunium: An Evolutionary Tuner for General-Purpose Multicore Applications},
+  year      = {2012},
+  pages     = {392-399},
+  abstract  = {Today's increasing diversity in multicore hardware challenges programmers when it comes to software performance optimization and portability. As multicore processors are in almost every PC and server, programmers now have to parallelize a larger spectrum of applications, many of which are non-numerical. To obtain good performance, programmers typically try out different software tuning parameter configurations on each platform. However, this manual approach to finding good configurations in the search space is impractical due to combinatorial explosion, but yet it is common practice due to lack of alternatives for general programs. This paper presents a smarter way to tackle this problem algorithmically for a variety of multicore applications, including non-numerical ones. Our work introduces AutoTunium, a novel feedback-directed optimizer that automates the application tuning process with evolutionary search strategies. The software infrastructure is easy to use and integrated in the popular Eclipse environment. It collects run-time information to predict parameter configurations that are likely to lead to good performance in future runs, and configures programs for production runs in the best possible way. We quantify the effectiveness of various tuning strategies on a diverse set of real applications and multicore platforms. The evaluation shows that AutoTunium's evolutionary strategies work well despite the broad scope of applications and perform better in this context than other simplex-based search algorithms. Our insights are derived from model-based analyses as well as from performance analyses with real programs in the PARSEC benchmark suite.},
+  doi       = {10.1109/icpads.2012.61},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094511177},
+}
+
+@Article{Lin2011,
+  author   = {Lin, Chao-Sheng and Lu, Chun-Hsien and Lin, Shang-Wei and Chen, Yean-Ru and Hsiung, Pao-Ann},
+  journal  = {Journal of Computer Science and Technology},
+  title    = {VERTAF/Multi-Core: A SysML-Based Application Framework for Multi-Core Embedded Software Development},
+  year     = {2011},
+  number   = {3},
+  pages    = {448-462},
+  volume   = {26},
+  abstract = {Multi-core processors are becoming prevalent rapidly in personal computing and embedded systems. Nevertheless, the programming environment for multi-core processor-based systems is still quite immature and lacks efficient tools. In this work, we present a new VERTAF/Multi-Core framework and show how software code can be automatically generated from SysML models of multi-core embedded systems. We illustrate how model-driven design based on SysML can be seamlessly integrated with Intel’s threading building blocks (TBB) and the quantum framework (QF) middleware. We use a digital video recording system to illustrate the benefits of the framework. Our experiments show how SysML/QF/TBB help in making multi-core embedded system programming model-driven, easy, and efficient.},
+  doi      = {10.1007/s11390-011-1146-3},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1047632364},
+}
+
+@Article{Rodrigues2011,
+  author   = {Rodrigues, Antonio Wendell De Oliveira and Guyomarc'H, Frédéric and Dekeyser, Jean-Luc},
+  journal  = {arXiv},
+  title    = {A Modeling Approach based on UML/MARTE for GPU Architecture},
+  year     = {2011},
+  abstract = {Nowadays, the High Performance Computing is part of the context of embedded
+systems. Graphics Processing Units (GPUs) are more and more used in
+acceleration of the most part of algorithms and applications. Over the past
+years, not many efforts have been done to describe abstractions of applications
+in relation to their target architectures. Thus, when developers need to
+associate applications and GPUs, for example, they find difficulty and prefer
+using API for these architectures. This paper presents a metamodel extension
+for MARTE profile and a model for GPU architectures. The main goal is to
+specify the task and data allocation in the memory hierarchy of these
+architectures. The results show that this approach will help to generate code
+for GPUs based on model transformations using Model Driven Engineering (MDE).},
+  doi      = {10.48550/arxiv.1105.4424},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1119355454},
+}
+
+@Article{Rodrigues2011a,
+  author   = {Rodrigues, Wendell and Guyomarc'h, Frédéric and Dekeyser, Jean-Luc},
+  journal  = {arXiv},
+  title    = {Programming Massively Parallel Architectures using MARTE: a Case Study},
+  year     = {2011},
+  abstract = {Nowadays, several industrial applications are being ported to parallel
+architectures. These applications take advantage of the potential parallelism
+provided by multiple core processors. Many-core processors, especially the
+GPUs(Graphics Processing Unit), have led the race of floating-point performance
+since 2003. While the performance improvement of general- purpose
+microprocessors has slowed significantly, the GPUs have continued to improve
+relentlessly. As of 2009, the ratio between many-core GPUs and multicore CPUs
+for peak floating-point calculation throughput is about 10 times. However, as
+parallel programming requires a non-trivial distribution of tasks and data,
+developers find it hard to implement their applications effectively. Aiming to
+improve the use of many-core processors, this work presents an case-study using
+UML and MARTE profile to specify and generate OpenCL code for intensive signal
+processing applications. Benchmark results show us the viability of the use of
+MDE approaches to generate GPU applications.},
+  doi      = {10.48550/arxiv.1103.4881},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1119340740},
+}
+
+@InProceedings{Luebke2008,
+  author    = {Luebke, David},
+  booktitle = {2008 5th IEEE International Symposium on Biomedical Imaging: From Nano to Macro},
+  title     = {CUDA: SCALABLE PARALLEL PROGRAMMING FOR HIGH-PERFORMANCE SCIENTIFIC COMPUTING},
+  year      = {2008},
+  pages     = {836-838},
+  abstract  = {Graphics processing units (GPUs) originally designed for computer video cards have emerged as the most powerful chip in a high-performance workstation. Unlike multicore CPU architectures, which currently ship with two or four cores, GPU architectures are “manycore” with hundreds of cores capable of running thousands of threads in parallel. NVIDIA's CUDA is a co-evolved hardware-software architecture that enables high-performance computing developers to harness the tremendous computational power and memory bandwidth of the GPU in a familiar programming environment - the C programming language. We describe the CUDA programming model and motivate its use in the biomedical imaging community.},
+  doi       = {10.1109/isbi.2008.4541126},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095265173},
+}
+
+@Article{Hadjidoukas2009,
+  author   = {Hadjidoukas, P.E. and Philos, G.Ch. and Dimakopoulos, V.V.},
+  journal  = {Scientific Programming},
+  title    = {Exploiting Fine-Grain Thread Parallelism on Multicore Architectures},
+  year     = {2009},
+  note     = {https://downloads.hindawi.com/journals/sp/2009/249651.pdf},
+  number   = {4},
+  pages    = {309-323},
+  volume   = {17},
+  abstract = {In this work we present a runtime threading system which provides an efficient substrate for fine-grain parallelism, suitable for deployment in multicore platforms. Its architecture encompasses a number of optimizations that make it particularly effective in managing a large number of threads and with low overheads. The runtime system has been integrated into an OpenMP implementation to allow for transparent usage under a high level programming paradigm. We evaluate our implementation on two multicore systems using synthetic microbenchmarks and a real-time face detection application.},
+  doi      = {10.1155/2009/249651},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1063202943},
+}
+
+@InProceedings{Rabenseifner2009,
+  author    = {Rabenseifner, R. and Hager, G. and Jost, G.},
+  booktitle = {2009 17th Euromicro International Conference on Parallel, Distributed and Network-based Processing},
+  title     = {Hybrid MPI/OpenMP Parallel Programming on Clusters of Multi-Core SMP Nodes},
+  year      = {2009},
+  pages     = {427-436},
+  abstract  = {Today most systems in high-performance computing (HPC) feature a hierarchical hardware design: Shared memory nodes with several multi-core CPUs are connected via a network infrastructure. Parallel programming must combine distributed memory parallelization on the node interconnect with shared memory parallelization inside each node. We describe potentials and challenges of the dominant programming models on hierarchically structured hardware: Pure MPI (Message Passing Interface), pure OpenMP (with distributed shared memory extensions) and hybrid MPI+OpenMP in several flavors. We pinpoint cases where a hybrid programming model can indeed be the superior solution because of reduced communication needs and memory consumption, or improved load balance. Furthermore we show that machine topology has a significant impact on performance for all parallelization strategies and that topology awareness should be built into all applications in the future. Finally we give an outlook on possible standardization goals and extensions that could make hybrid programming easier to do with performance in mind.},
+  doi       = {10.1109/pdp.2009.43},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1093861837},
+}
+
+@InProceedings{Martinez2011,
+  author    = {Martinez, Gabriel and Gardner, Mark and Feng, Wu-chun},
+  booktitle = {2011 IEEE 17th International Conference on Parallel and Distributed Systems},
+  title     = {CU2CL: A CUDA-to-OpenCL Translator for Multi- and Many-core Architectures},
+  year      = {2011},
+  note      = {https://vtechworks.lib.vt.edu/bitstreams/511c5d1a-75bd-4f13-bd6f-64dc98c2cb45/download},
+  pages     = {300-307},
+  abstract  = {The use of graphics processing units (GPUs) in high-performance parallel computing continues to become more prevalent, often as part of a heterogeneous system. For years, CUDA has been the de facto programming environment for nearly all general-purpose GPU (GPGPU) applications. In spite of this, the framework is available only on NVIDIA GPUs, traditionally requiring reimplementation in other frameworks in order to utilize additional multi- or many-core devices. On the other hand, OpenCL provides an open and vendor-neutral programming environment and runtime system. With implementations available for CPUs, GPUs, and other types of accelerators, OpenCL therefore holds the promise of a “write once, run anywhere” ecosystem for heterogeneous computing. Given the many similarities between CUDA and OpenCL, manually porting a CUDA application to OpenCL is typically straightforward, albeit tedious and error-prone. In response to this issue, we created CU2CL, an automated CUDA-to-OpenCL source-to-source translator that possesses a novel design and clever reuse of the Clang compiler framework. Currently, the CU2CL translator covers the primary constructs found in CUDA runtime API, and we have successfully translated many applications from the CUDA SDK and Rodinia benchmark suite. The performance of the automatically translated applications via CU2CL is on par with their manually ported counterparts.},
+  doi       = {10.1109/icpads.2011.48},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094182579},
+}
+
+@Article{Diaz2012,
+  author   = {Diaz, J. and Munoz-Caro, C. and Nino, A.},
+  journal  = {IEEE Transactions on Parallel and Distributed Systems},
+  title    = {A Survey of Parallel Programming Models and Tools in the Multi and Many-Core Era},
+  year     = {2012},
+  number   = {8},
+  pages    = {1369-1386},
+  volume   = {23},
+  abstract = {In this work, we present a survey of the different parallel programming models and tools available today with special consideration to their suitability for high-performance computing. Thus, we review the shared and distributed memory approaches, as well as the current heterogeneous parallel programming model. In addition, we analyze how the partitioned global address space (PGAS) and hybrid parallel programming models are used to combine the advantages of shared and distributed memory systems. The work is completed by considering languages with specific parallel support and the distributed programming paradigm. In all cases, we present characteristics, strengths, and weaknesses. The study shows that the availability of multi-core CPUs has given new impulse to the shared memory parallel programming approach. In addition, we find that hybrid parallel programming is the current way of harnessing the capabilities of computer clusters with multi-core nodes. On the other hand, heterogeneous programming is found to be an increasingly popular paradigm, as a consequence of the availability of multi-core CPUs+GPUs systems. The use of open industry standards like OpenMP, MPI, or OpenCL, as opposed to proprietary solutions, seems to be the way to uniformize and extend the use of parallel programming models.},
+  doi      = {10.1109/tpds.2011.308},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1061753868},
+}
+
+@InBook{Iwainsky2015,
+  author    = {Iwainsky, Christian and Shudler, Sergei and Calotoiu, Alexandru and Strube, Alexandre and Knobloch, Michael and Bischof, Christian and Wolf, Felix},
+  pages     = {451-463},
+  title     = {How Many Threads will be too Many? On the Scalability of OpenMP Implementations},
+  year      = {2015},
+  note      = {https://link.springer.com/content/pdf/10.1007/978-3-662-48096-0_35.pdf},
+  abstract  = {Exascale systems will exhibit much higher degrees of parallelism both in terms of the number of nodes and the number of cores per node. OpenMP is a widely used standard for exploiting parallelism on the level of individual nodes. Although successfully used on today’s systems, it is unclear how well OpenMP implementations will scale to much higher numbers of threads. In this work, we apply automated performance modeling to examine the scalability of OpenMP constructs across different compilers and platforms. We ran tests on Intel Xeon multi-board, Intel Xeon Phi, and Blue Gene with compilers from GNU, IBM, Intel, and PGI. The resulting models reveal a number of scalability issues in implementations of OpenMP constructs and show unexpected differences between compilers.},
+  booktitle = {Euro-Par 2015: Parallel Processing},
+  doi       = {10.1007/978-3-662-48096-0_35},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1052167219},
+}
+
+@InProceedings{Gray2012,
+  author    = {Gray, Ian and Audsley, Neil C.},
+  booktitle = {2012 23rd IEEE International Symposium on Rapid System Prototyping (RSP)},
+  title     = {Challenges in Software Development for Multicore System-on-Chip Development},
+  year      = {2012},
+  pages     = {115-121},
+  abstract  = {Multiprocessor Systems-on-Chip (MPSoC)-based platforms are becoming more common in the embedded domain. Such systems are a significant deviation from the homogeneous, uniprocessor architectures that have been traditionally employed by embedded designers, thereby making the software development process to effectively target the platform more challenging. Low-resource embedded systems rely on efficient implementations that are not well supported by traditional solutions based on architecture virtualisation or middleware. Within this paper we examine these challenges and discuss ways in which they can be mitigated. In particular, we focus on the contributions made by two recent approaches based on Model-Driven Engineering (MDE). We also discuss challenges for future research.},
+  doi       = {10.1109/rsp.2012.6380699},
+  groups    = {Multicore Performance Prediction},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094355382},
+}
+
+@Article{Bini2011,
+  author   = {Bini, E and Buttazzo, G and Eker, J and Schorr, S and Guerra, R and Fohler, G and Arzen, Karl-Erik and Romero, V and Scordino, C},
+  journal  = {IEEE Micro},
+  title    = {Resource Management on Multicore Systems: The ACTORS Approach},
+  year     = {2011},
+  number   = {3},
+  pages    = {72-81},
+  volume   = {31},
+  abstract = {High-performance embedded systems require the execution of many applications on multicore platforms and are subject to stringent restrictions and constraints. The ACTORS project approach provides temporal isolation through resource reservation over a multicore platform, adapting the available resources on the basis of the overall quality requirements. The architecture is fully operational on both ARM MPCore and x86 multicore platforms.},
+  doi      = {10.1109/mm.2011.1},
+  groups   = {Multicore Performance Prediction},
+  url      = {https://app.dimensions.ai/details/publication/pub.1061408760},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
 
 @Comment{jabref-meta: grouping:
@@ -9823,4 +10285,5 @@ Conclusions: Research on robotic arthroplasty is rapidly growing and originates 
 2 StaticGroup:Software Process Line\;0\;1\;\;\;\;;
 2 StaticGroup:Data Stream Processing Latency\;0\;1\;\;\;\;;
 2 StaticGroup:Business Process Meta Models\;0\;1\;\;\;\;;
+2 StaticGroup:Multicore Performance Prediction\;0\;1\;\;\;\;;
 }
