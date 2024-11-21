@@ -109,8 +109,9 @@ def extract_metadata(df: pd.DataFrame) -> pd.DataFrame:
         query = get_query(attirbutes, chunk)
         response = dsl.query_iterative(query) # type: dimcli.DslDataset
         data += response.publications
-
-    return pd.DataFrame(data)[attirbutes]
+    df = pd.DataFrame(data)[attirbutes]
+    df = df.dropna(subset=["abstract"])
+    return df
 
 if __name__ == "__main__":
     df = jabref_to_excel()
