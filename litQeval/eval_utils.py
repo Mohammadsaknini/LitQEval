@@ -365,20 +365,15 @@ def fetch_embeddings(topic: str,
     umap_embeddings = umap_embeddings[len(core_embeddings):]
 
     core_mean_embedding = np.mean(core_embeddings, axis=0).reshape(1, -1)
-    cos_threshold = cosine_similarity(
-        core_mean_embedding, core_embeddings).flatten().min()
+    cos_threshold = cosine_similarity(core_mean_embedding, core_embeddings).flatten().min()
 
-    core_in_baseline_embeddings = embeddings[:len(core_embeddings)]
-    core_in_predicted_embeddings = embeddings[len(core_embeddings):]
     baseline_umap_embeddings = umap_embeddings[:len(baseline_embeddings)]
     predicted_umap_embeddings = umap_embeddings[len(baseline_embeddings):]
-    baseline_in_core = baseline_pubs[baseline_pubs["id"].isin(
-        core_pubs["id"])].index
-    predicted_in_core = predicted_pubs[predicted_pubs["id"].isin(
-        core_pubs["id"])].index
-    core_in_baseline_umap_embeddings = umap_embeddings[baseline_in_core].copy()
-    core_in_predicted_umap_embeddings = umap_embeddings[predicted_in_core].copy(
-    )
+
+    core_in_baseline_idx = baseline_pubs[baseline_pubs["id"].isin(core_pubs["id"])].index
+    core_in_predicted_idx = baseline_pubs.shape[0] + predicted_pubs[predicted_pubs["id"].isin(core_pubs["id"])].index
+    baseline_core_umap_embeddings = umap_embeddings[core_in_baseline_idx].copy()
+    predicted_core_umap_embeddings = umap_embeddings[core_in_predicted_idx].copy()
 
     return {
         "embeddings": embeddings,
@@ -389,12 +384,10 @@ def fetch_embeddings(topic: str,
         "umap_core_embeddings": umap_core_embeddings,
         "core_mean_embedding": core_mean_embedding,
         "core_threshold": cos_threshold,
-        "core_in_baseline_embeddings": core_in_baseline_embeddings,
-        "core_in_predicted_embeddings": core_in_predicted_embeddings,
         "baseline_umap_embeddings": baseline_umap_embeddings,
         "predicted_umap_embeddings": predicted_umap_embeddings,
-        "core_in_baseline_umap_embeddings": core_in_baseline_umap_embeddings,
-        "core_in_predicted_umap_embeddings": core_in_predicted_umap_embeddings
+        "baseline_core_umap_embeddings": baseline_core_umap_embeddings,
+        "predicted_core_umap_embeddings": predicted_core_umap_embeddings
     }
 
 
@@ -486,7 +479,7 @@ def mvee(points, tol=0.0001):
     while err > tol:
         # assert u.sum() == 1 # invariant
         X = np.dot(np.dot(Q, np.diag(u)), Q.T)
-        M = np.diag(np.dot(np.dot(Q.T, la.inv(X)), Q))
+        M = np.diag(np.dot(np.dot(Q.T, la.inv(X+1e-10*np.eye(X.shape[0]))), Q))
         jdx = np.argmax(M)
         step_size = (M[jdx]-d-1.0)/((d+1)*(M[jdx]-1.0))
         new_u = (1-step_size)*u
@@ -592,7 +585,7 @@ def eval_clustering(df: pd.DataFrame,
         The number of core publications in the best cluster
     """
 
-    best_k = None
+    best_k = 99
     df_kmeans = df[df["Source"] == source].copy()
     for k in tqdm(iter(range(2, 100))):
         kmeans = KMeans(n_clusters=k, random_state=0).fit(source_embeddings)
@@ -615,10 +608,8 @@ def eval_clustering(df: pd.DataFrame,
     core_in_cluster = df_kmeans["core"].max()
     df_kmeans["cluster"] = df_kmeans["cluster"].replace(cluster, "BEST")
     print(f"Number of clusters: {best_k}, Threshold: {threshold}")
-    print(
-        f"Number of publications in the best cluster ({cluster}): {pubs_in_cluster.shape[0]}")
-    print(
-        f"Number of core publications in the best cluster: ({core_in_cluster}/{len(core_pubs)})")
+    print(f"Number of publications in the best cluster ({cluster}): {pubs_in_cluster.shape[0]}")
+    print(f"Number of core publications in the best cluster: ({core_in_cluster}/{len(core_pubs)})")
     if plot:
         fig = px.scatter(
             df_kmeans,
@@ -651,11 +642,9 @@ def eval_mvee(df: pd.DataFrame,
     mvee_is_inside = mvee_df[mvee_df["is_inside_mvee"] == "Inside"]
     total = len(mvee_df)
 
-    print(
-        f"Number of relevant {source} publications (MVEE): {mvee_is_inside.shape[0]} / {total}")
+    print(f"Number of relevant {source} publications (MVEE): {mvee_is_inside.shape[0]} / {total}")
     if plot:
-        fig = px.scatter(mvee_df, x="UMAP1", y="UMAP2", opacity=0.5,
-                         title=f"Publications inside the MVEE ({source})")
+        fig = go.Figure()
         fig.update_traces(marker=dict(size=4))
         fig.add_traces(
             [
@@ -674,7 +663,7 @@ def eval_mvee(df: pd.DataFrame,
                     y=mvee_df[mvee_df["is_inside_mvee"] == "Inside"]["UMAP2"],
                     mode="markers",
                     opacity=0.5,
-                    marker=dict(color='#2ca02c', size=3),
+                    marker=dict(color=COLORS[2], size=3),
                     showlegend=True,
                     name="Relevant"
                 ),
@@ -712,12 +701,9 @@ def eval_hull(df: pd.DataFrame,
     hull_is_inside = hu_df[hu_df["is_inside_hull"] == "Inside"]
     total = len(hu_df)
 
-    print(
-        f"Number of relevant {source} publications (Hull): {hull_is_inside.shape[0]} / {total}")
+    print(f"Number of relevant {source} publications (Hull): {hull_is_inside.shape[0]} / {total}")
     if plot:
-        fig = px.scatter(hu_df, x="UMAP1", y="UMAP2", opacity=0.5,
-                         title=f"Publications inside the Hull ({source})")
-        fig.update_traces(marker=dict(size=4))
+        fig = go.Figure()
         fig.add_traces(
             [
                 go.Scattergl(
@@ -735,7 +721,7 @@ def eval_hull(df: pd.DataFrame,
                     y=hu_df[hu_df["is_inside_hull"] == "Inside"]["UMAP2"],
                     mode="markers",
                     opacity=0.5,
-                    marker=dict(color='#2ca02c', size=3),
+                    marker=dict(color=COLORS[2], size=3),
                     showlegend=True,
                     name="Relevant"
                 ),
