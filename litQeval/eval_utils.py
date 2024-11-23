@@ -1,14 +1,29 @@
 from langchain_openai.embeddings import OpenAIEmbeddings
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_core.documents import Document
+from scipy.spatial import Delaunay
 from langchain_chroma import Chroma
+import plotly.graph_objects as go
+from sklearn.cluster import KMeans
+import plotly.express as px
 import numpy.linalg as la
 from pathlib import Path
+import plotly.io as pio
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
 import dimcli
+import umap
 
+pio.templates.default = "seaborn"
+COLORS = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+          '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+PLOT_CONFIGS = dict(
+    title_x=0.5, title_font_size=30, title_font_family="Modern Computer", font_family="Modern Computer",
+    xaxis_title="", yaxis_title="", showlegend=True, legend_title="",
+    xaxis_tickfont_size=15, yaxis_tickfont_size=15, legend_font_size=20, legend_itemsizing="constant",
+    legend_orientation="h", legend_yanchor="bottom", legend_y=-0.3, legend_xanchor="center", legend_x=0.5
+)
 try:
     EMBEDDING_MODEL = OpenAIEmbeddings(
         model="text-embedding-3-small",
@@ -177,27 +192,23 @@ def get_core_dataset(topic: str) -> tuple[list, np.ndarray]:
 
     Returns
     -------
-    group_embeddings: list
-        The list of core publications for the given topic
-    embeddings: np.NDArray
-        The embeddings of the core publications for the given topic
+    core_pubs: pd.DataFrame
+        The core publications for the given topic
+    core_vs: Chroma
+        The vector store containing the embeddings of the core publications
     """
     df = pd.read_excel("./data/core_publications.xlsx")
-    collection = Chroma(
+    df.rename(columns={"Pub_id": "id"}, inplace=True)
+    core_vs = Chroma(
         "core_publications",
         EMBEDDING_MODEL,
         persist_directory="./data/vs/core_publications",
     )
-    core_pubs = df[df["Topic"] == topic]["Pub_id"]
-    embeddings = []
-    for i in core_pubs.values:
-        embeddings.append(collection.get(
-            i, include=["embeddings"])["embeddings"])
-
-    return core_pubs.tolist(), np.squeeze(embeddings)
+    core_pubs = df[df["Topic"] == topic]
+    return core_pubs, core_vs
 
 
-def get_data(base_query: str, predicted_query: str, full_data=False) -> dict:
+def fetch_data(base_query: str, predicted_query: str, full_data=False) -> dict:
     """
     Retrieves and organizes publication and embedding data for a specified topic.
 
@@ -209,12 +220,16 @@ def get_data(base_query: str, predicted_query: str, full_data=False) -> dict:
         The predicted query to retrieve data for.
     slr : bool, optional
         Indicates if the full data should be searched instead of just the title and abstract, by default False.
-        
+
     Returns
     -------
-    dict
-        A dictionary containing core publications, mean embedding, baseline
-        and predicted publication datasets, as well as their embeddings.
+    dict:
+        "baseline_pubs": DataFrame containing the baseline publications
+        "predicted_pubs": DataFrame containing the predicted publications
+        "core_pubs": DataFrame containing the core publications
+        "baseline_vs": Chroma object containing the baseline vector store
+        "predicted_vs": Chroma object containing the predicted vector store
+        "core_vs": Chroma object containing the core vector store
     """
 
     topic = base_query.replace('"', "")
@@ -264,58 +279,162 @@ def get_data(base_query: str, predicted_query: str, full_data=False) -> dict:
             predicted_vs_path), predicted_pubs)
 
     # Get core dataset publications and mean embedding
-    core_pubs, core_embeddings = get_core_dataset(topic)
-    core_vs = Chroma("core_publications", EMBEDDING_MODEL,
-                     persist_directory="./data/vs/core_publications")
+    core_pubs, core_vs = get_core_dataset(topic)
 
-    core_mean_embedding = np.mean(core_embeddings, axis=0).reshape(1, -1)
-    cos_threshold = cosine_similarity(core_mean_embedding, core_embeddings).flatten().min()
     return {
         "baseline_pubs": baseline_pubs,
         "predicted_pubs": predicted_pubs,
+        "core_pubs": core_pubs,
         "baseline_vs": baseline_vs,
         "predicted_vs": predicted_vs,
         "core_vs": core_vs,
-        "core_pubs": core_pubs,
-        "core_mean_embedding": core_mean_embedding,
-        "core_embeddings": core_embeddings,
-        # The threshold to the least similar core publication from the mean embedding
-        "core_threshold": cos_threshold, 
     }
 
 
-def evaluate_recall(
-    core_pubs: list[str], baseline_pubs: list[str], predicted_pubs: list[str]
-) -> dict:
+def fetch_embeddings(topic: str,
+                     baseline_pubs: pd.DataFrame,
+                     predicted_pubs: pd.DataFrame,
+                     core_pubs: pd.DataFrame,
+                     baseline_vs: Chroma,
+                     predicted_vs: Chroma,
+                     core_vs: Chroma) -> dict:
     """
-    Evaluates the recall between the core publications and the baseline and predicted publications
+    Retrieves the embeddings for a given topic
 
     Parameters
     ----------
-    core_pubs: list[str]
-        The core publications
-    baseline_pubs: list[str]
+    topic: str
+        The topic to retrieve the embeddings for
+    baseline_pubs: pd.DataFrame
         The baseline publications
-    predicted_pubs: list[str]
+    predicted_pubs: pd.DataFrame
         The predicted publications
+    core_pubs: pd.DataFrame
+        The core publications
+    baseline_vs: Chroma
+        The vector store containing the embeddings of the baseline publications
+    predicted_vs: Chroma
+        The vector store containing the embeddings of the predicted publications
+    core_vs: Chroma
+        The vector store containing the embeddings of the core publications
 
     Returns
     -------
-    evaluation: dict
-        The evaluation results containing the baseline and predicted recall
+    embeddings: dict
+        "baseline": The embeddings of the baseline publications
+        "predicted": The embeddings of the predicted publications
+        "core": The embeddings of the core publications
+        "umap_embeddings": The UMAP embeddings of the core, baseline, and predicted publications
+        "umap_core_embeddings": The UMAP embeddings of the core publications
+        "core_mean_embedding": The mean embedding of the core publications
+        "core_threshold": The cosine similarity threshold to the least similar core publication from the mean embedding
     """
 
-    # Calculate the recall between core and baseline
-    baseline_recall = recall(core_pubs, baseline_pubs["id"].tolist())
-    predicted_recall = recall(core_pubs, predicted_pubs["id"].tolist())
+    # Retrieve embeddings for baseline
+    b_pub_ids = baseline_pubs["id"].tolist()
+    baseline_embeddings = []
+    for i in range(0, len(b_pub_ids), 25000):
+        baseline_embeddings.append(baseline_vs.get(
+            b_pub_ids[i:i+25000], include=["embeddings"])["embeddings"])
+    baseline_embeddings = np.concatenate(baseline_embeddings)
+
+    # Retrieve embeddings for predicted
+    p_pub_ids = predicted_pubs["id"].tolist()
+    predicted_embeddings = []
+    for i in range(0, len(p_pub_ids), 25000):
+        predicted_embeddings.append(predicted_vs.get(
+            p_pub_ids[i:i+25000], include=["embeddings"])["embeddings"])
+    predicted_embeddings = np.concatenate(predicted_embeddings)
+
+    a = topic # lazy fix
+    if a == "Sustainable Biofuel Economy":
+        a = "Sustainable Biofuel"
+    elif a == "Nanopharmaceuticals OR Nanonutraceuticals":
+        a = "Nanoparticles"  
+
+    core_embeddings = core_vs.get(core_pubs["id"].tolist(),
+                                  where={"topic": a}, include=[
+                                  "embeddings"])["embeddings"]
+
+    embeddings = np.vstack([baseline_embeddings, predicted_embeddings])
+    # UMAP embeddings
+    umap_embeddings = umap.UMAP(metric="cosine").fit_transform(
+        np.vstack([core_embeddings, baseline_embeddings, predicted_embeddings]))
+
+    umap_core_embeddings = umap_embeddings[:len(core_embeddings)]
+    umap_embeddings = umap_embeddings[len(core_embeddings):]
+
+    core_mean_embedding = np.mean(core_embeddings, axis=0).reshape(1, -1)
+    cos_threshold = cosine_similarity(
+        core_mean_embedding, core_embeddings).flatten().min()
+
+    core_in_baseline_embeddings = embeddings[:len(core_embeddings)]
+    core_in_predicted_embeddings = embeddings[len(core_embeddings):]
+    baseline_umap_embeddings = umap_embeddings[:len(baseline_embeddings)]
+    predicted_umap_embeddings = umap_embeddings[len(baseline_embeddings):]
+    baseline_in_core = baseline_pubs[baseline_pubs["id"].isin(
+        core_pubs["id"])].index
+    predicted_in_core = predicted_pubs[predicted_pubs["id"].isin(
+        core_pubs["id"])].index
+    core_in_baseline_umap_embeddings = umap_embeddings[baseline_in_core].copy()
+    core_in_predicted_umap_embeddings = umap_embeddings[predicted_in_core].copy(
+    )
 
     return {
-        "baseline_recall": baseline_recall,
-        "predicted_recall": predicted_recall,
+        "embeddings": embeddings,
+        "baseline_embeddings": baseline_embeddings,
+        "predicted_embeddings": predicted_embeddings,
+        "core_embeddings": core_embeddings,
+        "umap_embeddings": umap_embeddings,
+        "umap_core_embeddings": umap_core_embeddings,
+        "core_mean_embedding": core_mean_embedding,
+        "core_threshold": cos_threshold,
+        "core_in_baseline_embeddings": core_in_baseline_embeddings,
+        "core_in_predicted_embeddings": core_in_predicted_embeddings,
+        "baseline_umap_embeddings": baseline_umap_embeddings,
+        "predicted_umap_embeddings": predicted_umap_embeddings,
+        "core_in_baseline_umap_embeddings": core_in_baseline_umap_embeddings,
+        "core_in_predicted_umap_embeddings": core_in_predicted_umap_embeddings
     }
 
 
-def fscore(presicion: float, recall: float, beta: float = 1) -> float:
+def get_evaluation_data(base_query: str, predicted_query: str = None, full_data=False) -> dict:
+    """
+    Retrieves the evaluation data for a given topic
+
+    Parameters
+    ----------
+    base_query: str
+        The base query topic to retrieve data for
+    predicted_query: str
+        The predicted query to retrieve data for
+    full_data: bool, optional
+        Indicates if the full data should be searched instead of just the title and abstract, by default False
+
+    Returns
+    -------
+    evaluation_data: dict
+        The evaluation data containing the publications, vector stores, and embeddings
+    """
+    data = fetch_data(base_query, predicted_query, full_data)
+    baseline_pubs = data["baseline_pubs"]
+    predicted_pubs = data["predicted_pubs"]
+    embeddings = fetch_embeddings(
+        base_query, baseline_pubs, predicted_pubs,
+        data["core_pubs"], data["baseline_vs"],
+        data["predicted_vs"], data["core_vs"],
+    )
+
+    df = pd.concat([baseline_pubs, predicted_pubs])
+    df["Source"] = ["Baseline"] * \
+        len(baseline_pubs) + ["Predicted"] * len(predicted_pubs)
+
+    df["UMAP1"] = embeddings["umap_embeddings"][:, 0]
+    df["UMAP2"] = embeddings["umap_embeddings"][:, 1]
+    return {**data, **embeddings, "df": df}
+
+
+def fscore(presicion: float, recall: float, n_pubs: int, beta: float = 1) -> float:
     """
     Calculates the F score given the precision and recall values weighted by beta, higher beta values give more weight to recall.
 
@@ -335,7 +454,12 @@ def fscore(presicion: float, recall: float, beta: float = 1) -> float:
     """
     if recall == 0 or presicion == 0:
         return 0
-    return (1 + beta**2) * (presicion * recall) / ((beta**2 * presicion) + recall)
+    # decay function
+    p = 2 # Controls the initial slowness of the decay. 
+    q = 3 # Controls the speed-up near the end.
+    threshold = 50000 # The maximum threshold for the decay
+    decay = (1 - (n_pubs/threshold)**p)**q
+    return round(((1 + beta**2) * (presicion * recall) / ((beta**2 * presicion) + recall))* decay, 2) 
 
 
 def mvee(points, tol=0.0001):
@@ -374,15 +498,260 @@ def mvee(points, tol=0.0001):
                - np.multiply.outer(c, c))/d
     return A, c
 
-# point_wise
-
 
 def is_inside_ellipse(A, c, points):
     return np.array([((point - c) @ A @ (point - c).T) <= 1 for point in tqdm(points)])
 
-# if we have enough memory
+
+def eval_cosine(df, source, core_mean_embedding,
+                source_core_umap_embeddings, source_embeddings, core_pubs,
+                topic, plot=False, threshold=0.7):
+    df = df[df["Source"] == source].copy()
+    df_relevant = df.copy()
+    cosine_sim = cosine_similarity(
+        core_mean_embedding, source_embeddings).flatten()
+    df_relevant["similarity"] = cosine_sim
+    df_relevant = df_relevant[df_relevant["similarity"] >= threshold]
+    n_relevant = df_relevant.shape[0]
+    found_cores = set(df_relevant["id"]).intersection(core_pubs["id"])
+    print(f"The Core Publications in the {source} publications are {len(found_cores)}/{source_core_umap_embeddings.shape[0]}")
+    print(f"The Semantically Relevant {source} publications are {n_relevant}/{len(source_embeddings)}")
+    if plot:
+        fig = go.Figure()
+        fig.add_traces(
+            [
+                go.Scattergl(
+                    x=df["UMAP1"],
+                    y=df["UMAP2"],
+                    mode="markers",
+                    opacity=0.4,
+                    marker=dict(color="gray", size=3),
+                    showlegend=True,
+                    name="Irrlevant"
+                ),
+                go.Scattergl(
+                    x=df_relevant["UMAP1"],
+                    y=df_relevant["UMAP2"],
+                    mode="markers",
+                    opacity=0.7,
+                    marker=dict(color=COLORS[0], size=3),
+                    showlegend=True,
+                    name="Relevant"
+                ),
+                go.Scattergl(
+                    x=source_core_umap_embeddings[:, 0],
+                    y=source_core_umap_embeddings[:, 1],
+                    mode="markers",
+                    marker=dict(color="red", size=4),
+                    showlegend=True,
+                    name="Core Publications"
+                ),
+            ]
+        )
+        fig.update_layout(
+            **PLOT_CONFIGS, title=f"Cosine Similarity: {topic} - {source}")
+        fig.show()
+
+    return df_relevant, found_cores
 
 
-def is_inside_ellipse_v2(A, c, points):
-    shifted_points = points - c
-    return np.diag((shifted_points @ A) @ shifted_points.T <= 1)
+def eval_clustering(df: pd.DataFrame,
+                    source: str,
+                    source_embeddings: np.ndarray,
+                    core_pubs: set,
+                    topic: str,
+                    plot=False,
+                    threshold: float = 0.7) -> tuple[int, int, int]:
+    """
+    Find the best cluster for the given source and embeddings
+
+    paramaters
+    ----------
+    df: pd.DataFrame
+        The dataframe containing the publications
+    source: str
+        The source of the publications (Predicted or Baseline)
+    embeddings: np.ndarray
+        The embeddings of the source
+    core_pubs: set
+        The ids of the core publications
+    topic: str
+        The topic of the publications to be added to the title of the plot
+    plot: bool
+        Indicates if the plot should be displayed, by default False
+    threshold: float
+        The threshold for the number of core publications in the best cluster, by default 0.7
+
+    returns
+    -------
+    best_k: int
+        The best number of clusters
+    pubs_in_cluster: int
+        The number of publications in the best cluster
+    core_in_cluster: int
+        The number of core publications in the best cluster
+    """
+
+    best_k = None
+    df_kmeans = df[df["Source"] == source].copy()
+    for k in tqdm(iter(range(2, 100))):
+        kmeans = KMeans(n_clusters=k, random_state=0).fit(source_embeddings)
+        df_kmeans["cluster"] = kmeans.labels_.astype(str)
+        df_kmeans["core"] = df_kmeans["id"].isin(core_pubs).astype(int)
+        df_kmeans["core"] = df_kmeans.groupby(
+            "cluster")["core"].transform("sum")
+        core_in_cluster = df_kmeans["core"].max()
+        if core_in_cluster <= len(core_pubs) * threshold:
+            best_k = k - 1
+            break
+
+    df_kmeans = df[df["Source"] == source].copy()
+    kmeans = KMeans(n_clusters=best_k, random_state=0).fit(source_embeddings)
+    df_kmeans["cluster"] = kmeans.labels_.astype(str)
+    df_kmeans["core"] = df_kmeans["id"].isin(core_pubs).astype(int)
+    df_kmeans["core"] = df_kmeans.groupby("cluster")["core"].transform("sum")
+    cluster = df_kmeans.groupby("cluster")["core"].sum().idxmax()
+    pubs_in_cluster = df_kmeans[df_kmeans["cluster"] == cluster]
+    core_in_cluster = df_kmeans["core"].max()
+    df_kmeans["cluster"] = df_kmeans["cluster"].replace(cluster, "BEST")
+    print(f"Number of clusters: {best_k}, Threshold: {threshold}")
+    print(
+        f"Number of publications in the best cluster ({cluster}): {pubs_in_cluster.shape[0]}")
+    print(
+        f"Number of core publications in the best cluster: ({core_in_cluster}/{len(core_pubs)})")
+    if plot:
+        fig = px.scatter(
+            df_kmeans,
+            x="UMAP1",
+            y="UMAP2",
+            color="cluster",
+            title=f"{topic} - {source}",
+            labels={"cluster": "Cluster"},
+            opacity=0.5,
+        )
+        fig.update_traces(marker=dict(size=4))
+        fig.update_layout(**PLOT_CONFIGS, title=f"K-Means: {topic} - {source}")
+        fig.show()
+
+    return best_k, pubs_in_cluster, core_in_cluster
+
+
+def eval_mvee(df: pd.DataFrame,
+              source: str,
+              source_umap_core_embeddings: np.ndarray,
+              source_umap_embeddings: np.ndarray,
+              topic: str,
+              plot=False):
+    A, c = mvee(source_umap_core_embeddings)
+    is_inside = is_inside_ellipse(A, c, source_umap_embeddings)
+    mvee_df = df[df["Source"] == source].copy()
+    mvee_df["is_inside_mvee"] = is_inside
+    mvee_df["is_inside_mvee"] = mvee_df["is_inside_mvee"].replace(
+        {True: "Inside", False: "Outside"})
+    mvee_is_inside = mvee_df[mvee_df["is_inside_mvee"] == "Inside"]
+    total = len(mvee_df)
+
+    print(
+        f"Number of relevant {source} publications (MVEE): {mvee_is_inside.shape[0]} / {total}")
+    if plot:
+        fig = px.scatter(mvee_df, x="UMAP1", y="UMAP2", opacity=0.5,
+                         title=f"Publications inside the MVEE ({source})")
+        fig.update_traces(marker=dict(size=4))
+        fig.add_traces(
+            [
+
+                go.Scattergl(
+                    x=mvee_df[mvee_df["is_inside_mvee"] == "Outside"]["UMAP1"],
+                    y=mvee_df[mvee_df["is_inside_mvee"] == "Outside"]["UMAP2"],
+                    mode="markers",
+                    opacity=0.5,
+                    marker=dict(color='gray', size=3),
+                    showlegend=True,
+                    name="Irrelevant"
+                ),
+                go.Scattergl(
+                    x=mvee_df[mvee_df["is_inside_mvee"] == "Inside"]["UMAP1"],
+                    y=mvee_df[mvee_df["is_inside_mvee"] == "Inside"]["UMAP2"],
+                    mode="markers",
+                    opacity=0.5,
+                    marker=dict(color='#2ca02c', size=3),
+                    showlegend=True,
+                    name="Relevant"
+                ),
+                go.Scattergl(
+                    x=source_umap_core_embeddings[:, 0],
+                    y=source_umap_core_embeddings[:, 1],
+                    mode="markers",
+                    opacity=0.8,
+                    marker=dict(color="red", size=4),
+                    showlegend=True,
+                    name="Core Publications"
+                )
+            ]
+        )
+
+        fig.update_layout(**PLOT_CONFIGS, title=f"MVEE: {topic} - {source}")
+        fig.show()
+
+    return mvee_is_inside
+
+
+def eval_hull(df: pd.DataFrame,
+              source: str,
+              umap_core_embeddings: np.ndarray,
+              umap_embeddings: np.ndarray,
+              topic: str,
+              plot=False):
+
+    hu_df = df[df["Source"] == source].copy()
+    delu = Delaunay(umap_core_embeddings)
+    is_inside = delu.find_simplex(umap_embeddings) >= 0
+    hu_df["is_inside_hull"] = is_inside
+    hu_df["is_inside_hull"] = hu_df["is_inside_hull"].replace(
+        {True: "Inside", False: "Outside"})
+    hull_is_inside = hu_df[hu_df["is_inside_hull"] == "Inside"]
+    total = len(hu_df)
+
+    print(
+        f"Number of relevant {source} publications (Hull): {hull_is_inside.shape[0]} / {total}")
+    if plot:
+        fig = px.scatter(hu_df, x="UMAP1", y="UMAP2", opacity=0.5,
+                         title=f"Publications inside the Hull ({source})")
+        fig.update_traces(marker=dict(size=4))
+        fig.add_traces(
+            [
+                go.Scattergl(
+                    x=hu_df[hu_df["is_inside_hull"] == "Outside"]["UMAP1"],
+                    y=hu_df[hu_df["is_inside_hull"] == "Outside"]["UMAP2"],
+                    mode="markers",
+                    opacity=0.5,
+                    marker=dict(color='gray', size=3),
+                    showlegend=True,
+                    name="Irrelevant"
+                ),
+
+                go.Scattergl(
+                    x=hu_df[hu_df["is_inside_hull"] == "Inside"]["UMAP1"],
+                    y=hu_df[hu_df["is_inside_hull"] == "Inside"]["UMAP2"],
+                    mode="markers",
+                    opacity=0.5,
+                    marker=dict(color='#2ca02c', size=3),
+                    showlegend=True,
+                    name="Relevant"
+                ),
+                go.Scattergl(
+                    x=umap_core_embeddings[:, 0],
+                    y=umap_core_embeddings[:, 1],
+                    mode="markers",
+                    opacity=0.8,
+                    marker=dict(color="red", size=4),
+                    showlegend=True,
+                    name="Core Publications"
+                )
+            ]
+        )
+
+        fig.update_layout(**PLOT_CONFIGS, title=f"Hull: {topic} - {source}")
+        fig.show()
+
+    return hull_is_inside

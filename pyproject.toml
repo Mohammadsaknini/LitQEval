@@ -24,6 +24,7 @@ matplotlib = "^3.9.2"
 orca = "^1.8"
 kaleido = "0.1.0post1"
 xgboost = "^2.1.2"
+scipy = "^1.14.1"
 
 
 [tool.poetry.group.dev.dependencies]
