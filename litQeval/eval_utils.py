@@ -452,7 +452,8 @@ def fscore(presicion: float, recall: float, n_pubs: int, beta: float = 1) -> flo
     q = 3 # Controls the speed-up near the end.
     threshold = 50000 # The maximum threshold for the decay
     decay = (1 - (n_pubs/threshold)**p)**q
-    return round(((1 + beta**2) * (presicion * recall) / ((beta**2 * presicion) + recall))* decay, 2) 
+    decayed_presicion = presicion * decay
+    return round(((1 + beta**2) * (decayed_presicion * recall) / ((beta**2 * decayed_presicion) + recall)), 2) 
 
 
 def mvee(points, tol=0.0001):
