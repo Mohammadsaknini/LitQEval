@@ -372,6 +372,9 @@ def fetch_embeddings(topic: str,
 
     core_in_baseline_idx = baseline_pubs[baseline_pubs["id"].isin(core_pubs["id"])].index
     core_in_predicted_idx = baseline_pubs.shape[0] + predicted_pubs[predicted_pubs["id"].isin(core_pubs["id"])].index
+    
+    baseline_core_embeddings = embeddings[core_in_baseline_idx].copy()
+    predicted_core_embeddings = embeddings[core_in_predicted_idx].copy()
     baseline_core_umap_embeddings = umap_embeddings[core_in_baseline_idx].copy()
     predicted_core_umap_embeddings = umap_embeddings[core_in_predicted_idx].copy()
 
@@ -384,6 +387,8 @@ def fetch_embeddings(topic: str,
         "umap_core_embeddings": umap_core_embeddings,
         "core_mean_embedding": core_mean_embedding,
         "core_threshold": cos_threshold,
+        "baseline_core_embeddings": baseline_core_embeddings,
+        "predicted_core_embeddings": predicted_core_embeddings,
         "baseline_umap_embeddings": baseline_umap_embeddings,
         "predicted_umap_embeddings": predicted_umap_embeddings,
         "baseline_core_umap_embeddings": baseline_core_umap_embeddings,
@@ -448,8 +453,8 @@ def fscore(presicion: float, recall: float, n_pubs: int, beta: float = 1) -> flo
     if recall == 0 or presicion == 0:
         return 0
     # decay function
-    p = 2 # Controls the initial slowness of the decay. 
-    q = 3 # Controls the speed-up near the end.
+    p = 1.5 # Controls the initial slowness of the decay. 
+    q = 10 # Controls the speed-up near the end.
     threshold = 50000 # The maximum threshold for the decay
     decay = (1 - (n_pubs/threshold)**p)**q
     decayed_presicion = presicion * decay
@@ -499,7 +504,7 @@ def is_inside_ellipse(A, c, points):
 
 def eval_cosine(df, source, core_mean_embedding,
                 source_core_umap_embeddings, source_embeddings, core_pubs,
-                topic, plot=False, threshold=0.7):
+                topic, plot=False, threshold=0.69):
     df = df[df["Source"] == source].copy()
     df_relevant = df.copy()
     cosine_sim = cosine_similarity(
@@ -545,6 +550,7 @@ def eval_cosine(df, source, core_mean_embedding,
         fig.update_layout(
             **PLOT_CONFIGS, title=f"Cosine Similarity: {topic} - {source}")
         fig.show()
+        return df_relevant, found_cores, fig
 
     return df_relevant, found_cores
 
@@ -624,6 +630,7 @@ def eval_clustering(df: pd.DataFrame,
         fig.update_traces(marker=dict(size=4))
         fig.update_layout(**PLOT_CONFIGS, title=f"K-Means: {topic} - {source}")
         fig.show()
+        return best_k, pubs_in_cluster, core_in_cluster, fig
 
     return best_k, pubs_in_cluster, core_in_cluster
 
@@ -664,7 +671,7 @@ def eval_mvee(df: pd.DataFrame,
                     y=mvee_df[mvee_df["is_inside_mvee"] == "Inside"]["UMAP2"],
                     mode="markers",
                     opacity=0.5,
-                    marker=dict(color=COLORS[2], size=3),
+                    marker=dict(color=COLORS[0], size=3),
                     showlegend=True,
                     name="Relevant"
                 ),
@@ -682,6 +689,7 @@ def eval_mvee(df: pd.DataFrame,
 
         fig.update_layout(**PLOT_CONFIGS, title=f"MVEE: {topic} - {source}")
         fig.show()
+        return mvee_is_inside, fig
 
     return mvee_is_inside
 
@@ -722,7 +730,7 @@ def eval_hull(df: pd.DataFrame,
                     y=hu_df[hu_df["is_inside_hull"] == "Inside"]["UMAP2"],
                     mode="markers",
                     opacity=0.5,
-                    marker=dict(color=COLORS[2], size=3),
+                    marker=dict(color=COLORS[0], size=3),
                     showlegend=True,
                     name="Relevant"
                 ),
@@ -740,5 +748,6 @@ def eval_hull(df: pd.DataFrame,
 
         fig.update_layout(**PLOT_CONFIGS, title=f"Hull: {topic} - {source}")
         fig.show()
+        return hull_is_inside, fig
 
     return hull_is_inside
