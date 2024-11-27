@@ -246,6 +246,7 @@ def fetch_data(base_query: str, predicted_query: str, full_data=False) -> dict:
         baseline_pubs = pd.read_csv(baseline_path)
     else:
         baseline_pubs = get_pubs(base_query, False)
+        baseline_pubs.drop_duplicates(subset="id", inplace=True)
         baseline_pubs.to_csv(baseline_path, index=False)
 
     # Retrieve or load predicted publications
@@ -254,6 +255,7 @@ def fetch_data(base_query: str, predicted_query: str, full_data=False) -> dict:
         predicted_pubs = pd.read_csv(predicted_path)
     else:
         predicted_pubs = get_pubs(predicted_query, full_data)
+        predicted_pubs.drop_duplicates(subset="id", inplace=True)
         predicted_pubs.to_csv(predicted_path, index=False)
 
     # Retrieve or compute baseline vector store embeddings
