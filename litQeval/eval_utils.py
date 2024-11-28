@@ -360,7 +360,7 @@ def fetch_embeddings(topic: str,
 
     embeddings = np.vstack([baseline_embeddings, predicted_embeddings])
     # UMAP embeddings
-    umap_embeddings = umap.UMAP(metric="cosine").fit_transform(
+    umap_embeddings = umap.UMAP(metric="cosine", random_state=0).fit_transform(
         np.vstack([core_embeddings, baseline_embeddings, predicted_embeddings]))
 
     umap_core_embeddings = umap_embeddings[:len(core_embeddings)]
@@ -434,7 +434,7 @@ def get_evaluation_data(base_query: str, predicted_query: str = None, full_data=
     return {**data, **embeddings, "df": df}
 
 
-def fscore(presicion: float, recall: float, n_pubs: int, beta: float = 1) -> float:
+def fscore(precision: float, recall: float, n_pubs: int, beta: float = 1) -> float:
     """
     Calculates the F score given the precision and recall values weighted by beta, higher beta values give more weight to recall.
 
@@ -452,14 +452,14 @@ def fscore(presicion: float, recall: float, n_pubs: int, beta: float = 1) -> flo
     float
         The F1 score value.
     """
-    if recall == 0 or presicion == 0:
+    if recall == 0 or precision == 0:
         return 0
     # decay function
     p = 1.5 # Controls the initial slowness of the decay. 
     q = 10 # Controls the speed-up near the end.
     threshold = 50000 # The maximum threshold for the decay
     decay = (1 - (n_pubs/threshold)**p)**q
-    decayed_presicion = presicion * decay
+    decayed_presicion = precision * decay
     return round(((1 + beta**2) * (decayed_presicion * recall) / ((beta**2 * decayed_presicion) + recall)), 2) 
 
 
