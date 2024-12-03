@@ -563,7 +563,7 @@ def eval_clustering(df: pd.DataFrame,
                     core_pubs: set,
                     topic: str,
                     plot=False,
-                    threshold: float = 0.7) -> tuple[int, int, int]:
+                    threshold: float = 0.7) -> tuple[int, pd.DataFrame, int]:
     """
     Find the best cluster for the given source and embeddings
 
@@ -605,7 +605,20 @@ def eval_clustering(df: pd.DataFrame,
         core_in_cluster = df_kmeans["core"].max()
         
         if len(core_pubs) == 0:
-            return 0, 0, 0
+            if plot:
+                fig = px.scatter(
+                    df_kmeans,
+                    x="UMAP1",
+                    y="UMAP2",
+                    title=f"{topic} - {source}",
+                    labels={"cluster": "Cluster"},
+                    opacity=0.5,
+                )
+                fig.update_traces(marker=dict(size=4))
+                fig.update_layout(**PLOT_CONFIGS, title=f"K-Means: {topic} - {source}")
+                fig.show()
+                return 0, pd.DataFrame(columns=["id"]), 0, fig
+            return 0, pd.DataFrame(columns=["id"]), 0
         
         if core_in_cluster <= len(core_pubs) * threshold:
             best_k = k - 1
