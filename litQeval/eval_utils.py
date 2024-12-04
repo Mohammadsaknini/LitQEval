@@ -604,7 +604,7 @@ def eval_clustering(df: pd.DataFrame,
             "cluster")["core"].transform("sum")
         core_in_cluster = df_kmeans["core"].max()
         
-        if len(core_pubs) == 0:
+        if len(core_pubs) < 2:
             if plot:
                 fig = px.scatter(
                     df_kmeans,
