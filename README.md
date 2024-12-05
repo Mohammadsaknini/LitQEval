@@ -33,6 +33,30 @@ The framework can be used to:
 - Train and test automated query generation systems
 - Research new evaluation metrics for literature search
 
+## Technical Details
+- Uses OpenAI's embedding models for semantic analysis
+- Integration with Dimensions.ai for publication retrieval
+## Project Structure
+- **data/**
+  - `core_publications.csv` - Core publications for each research topic
+  - `metadata.xlsx` - Metadata for each core publication
+  - `publications.bib` - Bibtex file for core publications (It is a JabRef file format, incase you want to have a look at the topics and their surveys)
+  - `queries.json` - Contains all the used queries in order to generate the dataset (Baseline, Predicted, SLRs) 
+  - **vs/** - Directory that should contain the vector stores of the dataset, please download from: 
+  - **text/** - Core publications and dataset files
+      - **[Topic]/** - Directory for each research topic
+      - `baseline_pubs.csv` - Contains the results of the baseline query for the topic
+      - `predicted_pubs.csv` - Contains the results of the predicted query for the topic
+      - `slr_pubs.csv` - Contains the results of the SLR query for the topic (Not always available)
+- **litqeval/**
+  - **notebooks/** - Jupyter notebooks for analysis
+      - `dataset_eda.ipynb` - Dataset exploration
+      - `ablation.ipynb` - Ablation study to understand the effect of different metrics
+      - `empirical_thresholds.ipynb` - Empirical thresholds for the cosine similarity metric
+      - ...
+  - `eval_utils.py` - Evaluation utility functions
+  - `evaluation.py` - Runs the evaluation pipline using the already existing dataset
+  - `data.py` - A script to extract and preprocess data based on the file: `data/publications.bib` (Requires dimensions.ai API key)
 ## Installation
 
 ### Prerequisites
