@@ -42,7 +42,7 @@ The framework can be used to:
   - `metadata.xlsx` - Metadata for each core publication
   - `publications.bib` - Bibtex file for core publications (It is a JabRef file format, incase you want to have a look at the topics and their surveys)
   - `queries.json` - Contains all the used queries in order to generate the dataset (Baseline, Predicted, SLRs) 
-  - **vs/** - Directory that should contain the vector stores of the dataset, please download from: 
+  - **vs/** - Directory that should contain the vector stores of the dataset, please download from: [here](https://www.swisstransfer.com/d/757305fb-6db3-46ac-a93a-867894db543b)
   - **text/** - Core publications and dataset files
       - **[Topic]/** - Directory for each research topic
       - `baseline_pubs.csv` - Contains the results of the baseline query for the topic
