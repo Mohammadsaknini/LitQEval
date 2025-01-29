@@ -11237,6 +11237,289 @@ MDE approaches to generate GPU applications.},
   url      = {https://app.dimensions.ai/details/publication/pub.1061788688},
 }
 
+@InProceedings{Fittkau2012,
+  author    = {Fittkau, Florian and Frey, Soren and Hasselbring, Wilhelm},
+  booktitle = {2012 IEEE 6th International Workshop on the Maintenance and Evolution of Service-Oriented and Cloud-Based Systems (MESOCA)},
+  title     = {CDOSim: Simulating Cloud Deployment Options for Software Migration Support},
+  year      = {2012},
+  pages     = {37-46},
+  abstract  = {The evaluation of competing cloud deployment options (CDOs) forms a major challenge when migrating software systems to cloud environments. For example, there exists a plethora of potential cloud provider candidates, components must be mapped to suitable virtual machine instances, and, to exploit elasticity, appropriate runtime adaptation strategies for specific usage profiles have to be defined. But analyzing potential CDOs manually is intractable, costly, and time-consuming due to the heterogeneity of the cloud environments and the overall combinatorial design space complexity. We present the simulation tool CDOSim that can simulate cost and performance properties of those CDOs. It builds upon and significantly extends the cloud simulator CloudSim and integrates into our cloud migration framework CloudMIG. Additionally, we created a cloud benchmark to augment CloudMIG's cloud environment models with provider-specific performance characteristics. Along with this simulation input, CDOSim utilizes reverse-engineered architectural models and can employ actual monitored workload. We report on extensive experiments incorporating Eucalyptus and Amazon EC2 which show that CDOSim can sufficiently accurate predict the cost and performance properties of CDOs.},
+  doi       = {10.1109/mesoca.2012.6392599},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094505139},
+}
+
+@InProceedings{Frey2011,
+  author    = {Frey, Sören and Hasselbring, Wilhelm},
+  booktitle = {2011 15th European Conference on Software Maintenance and Reengineering},
+  title     = {An Extensible Architecture for Detecting Violations of a Cloud Environment&#x27;s Constraints During Legacy Software System Migration},
+  year      = {2011},
+  pages     = {269-278},
+  abstract  = {By utilizing cloud infrastructures or platforms as services, SaaS providers can counter fluctuating loads through smoothly scaling up and down and therefore improve resource-and cost-efficiency, or transfer responsibility for the maintenance of complete underlying software stacks to a cloud provider, for instance. Our model-based approach CloudMIG aims at supporting SaaS providers to semiautomatically migrate legacy software systems to the cloud. Thereby, the analysis of conformance with the specific constraints imposed by a cloud environment candidate along with the detection of constraint violations constitutes an important early phase activity. We present an extensible architecture for describing cloud environments, their corresponding constraints, and appropriate violation detection mechanisms. There exist predefined constraint types with specified domain semantics as well as generic variants for modeling arbitrary constraints. A software system's compliance can be examined with the assistance of so called constraint validators. They operate on discovered KDM-based models of a legacy system. Additional constraint validators can be plugged into the validation process as needed. In this context, we implemented a prototype and modeled the PaaS environment Google App Engine for Java. We report on a quantitative evaluation regarding the detected constraint violations of five open source systems.},
+  doi       = {10.1109/csmr.2011.33},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094808840},
+}
+
+@Article{Menzel2012,
+  author   = {Menzel, Michael and Ranjan, Rajiv},
+  journal  = {arXiv},
+  title    = {CloudGenius: Decision Support for Web Server Cloud Migration},
+  year     = {2012},
+  abstract = {Cloud computing is the latest computing paradigm that delivers hardware and
+software resources as virtualized services in which users are free from the
+burden of worrying about the low-level system administration details. Migrating
+Web applications to Cloud services and integrating Cloud services into existing
+computing infrastructures is non-trivial. It leads to new challenges that often
+require innovation of paradigms and practices at all levels: technical,
+cultural, legal, regulatory, and social. The key problem in mapping Web
+applications to virtualized Cloud services is selecting the best and compatible
+mix of software images (e.g., Web server image) and infrastructure services to
+ensure that Quality of Service (QoS) targets of an application are achieved.
+The fact that, when selecting Cloud services, engineers must consider
+heterogeneous sets of criteria and complex dependencies between infrastructure
+services and software images, which are impossible to resolve manually, is a
+critical issue. To overcome these challenges, we present a framework (called
+CloudGenius) which automates the decision-making process based on a model and
+factors specifically for Web server migration to the Cloud. CloudGenius
+leverages a well known multi-criteria decision making technique, called
+Analytic Hierarchy Process, to automate the selection process based on a model,
+factors, and QoS parameters related to an application. An example application
+demonstrates the applicability of the theoretical CloudGenius approach.
+Moreover, we present an implementation of CloudGenius that has been validated
+through experiments.},
+  doi      = {10.48550/arxiv.1203.3997},
+  groups   = {Cloud Migration},
+  url      = {https://app.dimensions.ai/details/publication/pub.1119463839},
+}
+
+@InProceedings{Beserra2012,
+  author    = {Beserra, Patricia V. and Camara, Alessandro and Ximenes, Rafael and Albuquerque, Adriano B. and Mendonca, Nabor C.},
+  booktitle = {2012 IEEE 6th International Workshop on the Maintenance and Evolution of Service-Oriented and Cloud-Based Systems (MESOCA)},
+  title     = {Cloudstep: A Step-by-Step Decision Process to Support Legacy Application Migration to the Cloud},
+  year      = {2012},
+  pages     = {7-16},
+  abstract  = {Cloud computing is an emerging computing paradigm whose benefits (such as high scalability., reduced IT costs., self-service on demand., and pay-as-you-go price models) have increasingly attracted the interest of the corporate world. Nevertheless., many organizations have found it difficult to adopt cloud-based solutions., particularly regarding the migration of their existing legacy applications to this new environment. One of the main obstacles faced by those organizations is the lack of a general process to help application developers not only in selecting the cloud models and services best suited for their application., but also in carefully assessing the various risks and benefits involved. To fill this gap., this paper presents Cloudstep., a step-by-step decision process aimed at supporting legacy application migration to the cloud. The process relies on the creation of template-based profiles characterizing the organization., the target legacy application and candidate cloud providers., which are then cross-analyzed to help identify and possibly resolve critical constraints (either technical or non technical) that may hinder migration to the cloud. The use of the process is illustrated through an analysis of key factors influencing the migration of a commercial medical application to different infrastructure-as-a-service cloud providers.},
+  doi       = {10.1109/mesoca.2012.6392602},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1093694541},
+}
+
+@InProceedings{Mohagheghi2011,
+  author    = {Mohagheghi, Parastoo and Sæther, Thor},
+  booktitle = {2011 IEEE World Congress on Services},
+  title     = {Software Engineering Challenges for Migration to the Service Cloud Paradigm},
+  year      = {2011},
+  pages     = {507-514},
+  abstract  = {This paper presents on-going work in a research project on defining methodology and tools for model-driven migration of legacy applications to a service-oriented architecture with deployment in the cloud; i.e. the Service Cloud paradigm. We have performed a comprehensive state of the art analysis and present some findings here. In parallel, the two industrial participants in the project have specified their requirements and expectations regarding modernization of their applications. The SOA paradigm implies the breakdown of architecture into high-grain components providing business services. For taking advantage of the services of cloud computing technologies, the clients' architecture should be decomposed, decoupled and be made scalable. Also requirements regarding servers, data storage and security, networking and response time, business models and pricing should be projected. We present software engineering challenges related to these aspects and examples of these in the context of one of the industrial cases in the project.},
+  doi       = {10.1109/services.2011.26},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094203398},
+}
+
+@InProceedings{KhajehHosseini2010,
+  author    = {Khajeh-Hosseini, Ali and Greenwood, David and Sommerville, Ian},
+  booktitle = {2010 IEEE 3rd International Conference on Cloud Computing},
+  title     = {Cloud Migration: A Case Study of Migrating an Enterprise IT System to IaaS},
+  year      = {2010},
+  note      = {http://arxiv.org/pdf/1002.3492},
+  pages     = {450-457},
+  abstract  = {This case study illustrates the potential benefits and risks associated with the migration of an IT system in the oil & gas industry from an in-house data center to Amazon EC2 from a broad variety of stakeholder perspectives across the enterprise, thus transcending the typical, yet narrow, financial and technical analysis offered by providers. Our results show that the system infrastructure in the case study would have cost 37% less over 5 years on EC2, and using cloud computing could have potentially eliminated 21% of the support calls for this system. These findings seem significant enough to call for a migration of the system to the cloud but our stakeholder impact analysis revealed that there are significant risks associated with this. Whilst the benefits of using the cloud are attractive, we argue that it is important that enterprise decision-makers consider the overall organizational implications of the changes brought about with cloud computing to avoid implementing local optimizations at the cost of organization-wide performance.},
+  doi       = {10.1109/cloud.2010.37},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1093422882},
+}
+
+@Article{Andrikopoulos2012,
+  author   = {Andrikopoulos, Vasilios and Binz, Tobias and Leymann, Frank and Strauch, Steve},
+  journal  = {Computing},
+  title    = {How to adapt applications for the Cloud environment},
+  year     = {2012},
+  number   = {6},
+  pages    = {493-535},
+  volume   = {95},
+  abstract = {The migration of existing applications to the Cloud requires adapting them to a new computing paradigm. Existing works have focused on migrating the whole application stack by means of virtualization and deployment on the Cloud, delegating the required adaptation effort to the level of resource management. With the proliferation of Cloud services allowing for more flexibility and better control over the application migration, the migration of individual application layers, or even individual architectural components to the Cloud, becomes possible. Towards this goal, in this work we focus on the challenges and solutions for each layer when migrating different parts of the application to the Cloud. We categorize different migration types and identify the potential impact and adaptation needs for each of these types on the application layers based on an exhaustive survey of the State of the Art. We also investigate various cross-cutting concerns that need to be considered for the migration of the application, and position them with respect to the identified migration types. Finally, we present some of the open research issues in the field and position our future work targeting these research questions.},
+  doi      = {10.1007/s00607-012-0248-2},
+  groups   = {Cloud Migration},
+  url      = {https://app.dimensions.ai/details/publication/pub.1026275219},
+}
+
+@InProceedings{Lloyd2011,
+  author    = {Lloyd, Wes and Pallickara, Shrideep and David, Olaf and Lyon, Jim and Arabi, Mazdak and Rojas, Ken},
+  booktitle = {2011 IEEE/ACM 12th International Conference on Grid Computing},
+  title     = {Migration of Multi-tier Applications to Infrastructure-as-a-Service Clouds: An Investigation Using Kernel-based Virtual Machines},
+  year      = {2011},
+  pages     = {137-144},
+  abstract  = {To investigate challenges of multi-tier application migration to Infrastructure-as-a-Service (laaS) clouds we performed an experimental investigation by deploying a processor bound and input-output bound variant of the RUSLE2 erosion model to an laaS based private cloud. Scaling the applications to achieve optimal system throughput is complex and involves much more than simply increasing the number of allotted virtual machines (VMs). While scaling the application variants a series of bottlenecks were encountered unique to an application's processing., I/O., and memory requirements., herein referred to as an application's profile. To investigate the impact of provisioning variation for hosting multi-tier applications we tested four schemes of VM deployments across the physical nodes of our cloud. Performance degradation was more pronounced when multiple I/O or CPU resource intensive application components were co-located on the same physical hardware. We investigated the virtualization overhead incurred using Kernel-based virtual machines (KVM) by deploying our application variants to both physical and virtual machines. Overhead varied based on the unique characteristics of each application's profile. We observed ~112% overhead for the input/output bound application and just ~ 10% overhead for the processor bound application. Understanding an application's profile was found to be important for optimal laaS-based cloud migration and scaling.},
+  doi       = {10.1109/grid.2011.26},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094635108},
+}
+
+@InProceedings{Vu2012,
+  author    = {Vu, Quang Hieu and Asal, Rasool},
+  booktitle = {2012 IEEE Eighth World Congress on Services},
+  title     = {Legacy Application Migration to the Cloud: Practicability and Methodology},
+  year      = {2012},
+  pages     = {270-277},
+  abstract  = {Cloud computing technology has become popular of late due to several advantages it has compared to traditional computing models. For example, cloud computing helps users to save a significant amount of cost that is related to infrastructure investment, management, and maintenance. Furthermore, since cloud computing offers agility, flexibility, and scalability, applications could be deployed, developed, and scaled quickly and easily on the cloud. Nevertheless, while it is not difficult to develop a new application on the cloud, there is a question of whether legacy applications could be moved to the cloud. Knowing the answer for this question is very important to users, who have stable applications in traditional computing platforms, but want to move these applications to the cloud to leverage the advantages of cloud computing. In this paper, we will analyze features of cloud computing services to introduce an answer for this question. In particular, our answer will focus on the practicability and methodology of migrating legacy applications to the cloud. As a proof-of-concept, we support our answer with the migration of three existing applications being used at British Telecom to Google Apps Engine: one is a Java-based application while the two others are Python-based applications. Among the two Python-based applications, one requires a migration of its database in addition to the migration of the application itself.},
+  doi       = {10.1109/services.2012.47},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095459235},
+}
+
+@InProceedings{Yam2011,
+  author    = {Yam, Chew-Yean and Baldwin, Adrian and Shiu, Simon and Ioannidis, Christos},
+  booktitle = {2011IEEE 10th International Conference on Trust, Security and Privacy in Computing and Communications},
+  title     = {Migration to Cloud as Real Option Investment decision under uncertainty},
+  year      = {2011},
+  pages     = {940-949},
+  abstract  = {If cloud is so good then why aren't companies using it more? In this paper we look at how companies should make a decision to move some IT services or their IT infrastructure into the cloud. The move may initially look attractive in that it offers cost benefits but there is also considerable uncertainty, not least around security and information stewardship. Within the paper we propose the use of a real option model to help think about when to switch to cloud based on the expected benefits, uncertainties and the value a company puts on money.},
+  doi       = {10.1109/trustcom.2011.130},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095784692},
+}
+
+@InProceedings{Chauhan2011,
+  author    = {Chauhan, Muhammad Aufeef and Babar, Muhammad Ali},
+  booktitle = {2011 IEEE 4th International Conference on Cloud Computing},
+  title     = {Migrating Service-Oriented System to Cloud Computing: An Experience Report},
+  year      = {2011},
+  pages     = {404-411},
+  abstract  = {Cloud computing has gained significant attention of industry and academic sectors which are interested in adopting or experimenting with this technology. An increasing number of companies are expected to migrate their systems to cloud enabled infrastructures. However, there has not been much attention paid to provide sufficient process support. Since migration projects are likely to encounter several kinds of challenges, it is important to identify and share the process and logistical requirements of migration projects in order to build a body of knowledge of appropriate process, methods, and tools. This paper purports to contribute to the growing knowledge of how to migrate existing systems to cloud computing by reporting our effort aimed at migrating an Open Source Software (OSS) framework, Hackystat, to cloud computing. We report the main steps followed, the process and technical challenges faced, and some of the strategies that helped us to address those challenges. We expect the reported experiences can provide readers with useful insights into the process and technical aspects that should be considered when migrating existing software systems to cloud computing infrastructures.},
+  doi       = {10.1109/cloud.2011.46},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1093590373},
+}
+
+@InProceedings{Zardari2011,
+  author    = {Zardari, Shehnila and Bahsoon, Rami},
+  booktitle = {Proceedings of the 2nd International Workshop on Software Engineering for Cloud Computing},
+  title     = {Cloud adoption},
+  year      = {2011},
+  pages     = {29-35},
+  abstract  = {We motivate the need for a new requirements engineering methodology for systematically helping businesses and users to adopt cloud services and for mitigating risks in such transition. The methodology is grounded in goal oriented approaches for requirements engineering. We argue that Goal Oriented Requirements Engineering (GORE) is a promising paradigm to adopt for goals that are generic and flexible statements of users' requirements, which could be refined, elaborated, negotiated, mitigated for risks and analysed for economics considerations. We describe the steps of the proposed process and exemplify the use of the methodology through an example. The methodology can be used by small to large scale organisations to inform crucial decisions related to cloud adoption.},
+  doi       = {10.1145/1985500.1985506},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1015329134},
+}
+
+@InProceedings{Ward2010,
+  author    = {Ward, C. and Aravamudan, N. and Bhattacharya, K. and Cheng, K. and Filepp, R. and Kearney, R. and Peterson, B. and Shwartz, L. and Young, C. C.},
+  booktitle = {2010 IEEE 3rd International Conference on Cloud Computing},
+  title     = {Workload Migration into Clouds - Challenges, Experiences, Opportunities},
+  year      = {2010},
+  pages     = {164-171},
+  abstract  = {The steady drumbeat of Cloud as a disruptive influence for Infrastructure Service Providers (ISP's) and the enablement vehicle for Software As A Service (SAAS) providers can be heard loud and clear in the industry today. In fact, Cloud is probably at the peak of the hype curve, and already there are identified challenges associated with effective deployment for business critical applications (so called Production Applications) in mature enterprises. One of these challenges is the smooth migration of workload from the previous environment to the new cloud enabled environment in a cost effective way, with minimal disruption and risk. In this paper we introduce extensions to an integrated automation capability called the Darwin framework that enables workload migration for this scenario and discuss the impact that automated migration has on the cost and risks normally associated with migration to clouds.},
+  doi       = {10.1109/cloud.2010.84},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095092589},
+}
+
+@InProceedings{Tran2011,
+  author    = {Tran, Van and Keung, Jacky and Liu, Anna and Fekete, Alan},
+  booktitle = {Proceedings of the 2nd International Workshop on Software Engineering for Cloud Computing},
+  title     = {Application migration to cloud},
+  year      = {2011},
+  pages     = {22-28},
+  abstract  = {Cloud computing has attracted attention as an important platform for software deployment, with perceived benefits such as elasticity to fluctuating load, and reduced operational costs compared to running in enterprise data centers. While some software is written from scratch specially for the cloud, many organizations also wish to migrate existing applications to a cloud platform. Such a migration exercise to a cloud platform is not easy: some changes need to be made to deal with differences in software environment, such as programming model and data storage APIs, as well as varying performance qualities. We report here on experiences in doing a number of sample migrations. We propose a taxonomy of the migration tasks involved, and we show the breakdown of costs among categories of task, for a case-study which migrated a .NET n-tier application to run on Windows Azure. We also indicate important factors that impact on the cost of various migration tasks. This work contributes towards our future direction of building a framework for cost-benefit tradeoff analysis that would apply to migrating applications to cloud platforms, and could help decision-makers evaluate proposals for using cloud computing.},
+  doi       = {10.1145/1985500.1985505},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1031146575},
+}
+
+@InProceedings{Babar2011,
+  author    = {Babar, Muhammad Ali and Chauhan, Muhammad Aufeef},
+  booktitle = {Proceedings of the 2nd International Workshop on Software Engineering for Cloud Computing},
+  title     = {A tale of migration to cloud computing for sharing experiences and observations},
+  year      = {2011},
+  pages     = {50-56},
+  abstract  = {Cloud computing is an emerging paradigm, which promises to make the utility computing model comprehensively implemented by using virtualization technologies. An increasing number of enterprises have started providing and using Cloud-enabled infrastructures and services. However, the advancement of cloud computing poses several new challenges to existing methods and approaches to develop and evolve software intensive systems. This paper reports our experiences and observations gained from migrating an Open Source Software (OSS), Hackystat, to cloud computing. We expect that our description of Hackystat's architecture prior and after migration and design decisions can provide some guidance about modifying architecture of a service-based system for cloud computing. Moreover, we also hope that our experiences reported in this paper can contribute to the identification of some research questions for improving software engineering support for developing and evolving cloud-enabled systems.},
+  doi       = {10.1145/1985500.1985509},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1029470968},
+}
+
+@InProceedings{Tran2011a,
+  author    = {Tran, Van T.K. and Lee, Kevin and Pekete, Alan and Liu, Anna and Keung, Jacky},
+  booktitle = {2011 International Symposium on Empirical Software Engineering and Measurement},
+  title     = {Size Estimation of Cloud Migration Projects with Cloud Migration Point (CMP)},
+  year      = {2011},
+  note      = {http://ira.lib.polyu.edu.hk/bitstream/10397/5191/3/esem.pdf},
+  pages     = {265-274},
+  abstract  = {One major obstacle to enterprise adoption of cloud technologies has been the lack of visibility into migration effort and cost. In this paper, we present a methodology, called Cloud Migration Point (CMP), for estimating the size of cloud migration projects, by recasting a well-known software size estimation model called Function Point (FP) into the context of cloud migration. We empirically evaluate our CMP model by performing a cross-validation on six different small-scale cloud migration projects and show that our size estimation model can be used as a reliable predictor for effort estimation. Furthermore, we prove that our CMP model satisfies the fundamental properties of a software size measure.},
+  doi       = {10.1109/esem.2011.35},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1094056660},
+}
+
+@InProceedings{Yu2011,
+  author    = {Yu, Dunhui and Wang, Jian and Hu, Bo and Lit, Jianxiao and Zhang, Xiuwei and He, Keqing and Zhang, Liang-Jie},
+  booktitle = {2011 IEEE World Congress on Services},
+  title     = {A Practical Architecture of Cloudification of Legacy Applications},
+  year      = {2011},
+  pages     = {17-24},
+  abstract  = {Cloud computing has been attracting much attention since its birth. How to cloudify software systems especially legacy applications in the cloud era is becoming increasingly important. Based on RGPS meta-model framework and International standards-ISO/IEC 19763, an architecture for cloudification of legacy applications is proposed, which consists of three parts: a Web portal, a SaaS service supermarket, and a SaaS application development platform. In this paper, we take an open source software as an example to illustrate the proposed approach. Based on the architecture and supporting techniques on software virtualization and multi-tenancy, we develop a prototype CloudCRM to demonstrate the basic procedure for cloudification of legacy applications, as well as the feasibility of the proposed approach.},
+  doi       = {10.1109/services.2011.84},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095101569},
+}
+
+@Article{Frey2012,
+  author   = {Frey, Sören and Hasselbring, Wilhelm and Schnoor, Benjamin},
+  journal  = {Journal of Software},
+  title    = {Automatic conformance checking for migrating software systems to cloud infrastructures and platforms},
+  year     = {2012},
+  number   = {10},
+  pages    = {1089-1115},
+  volume   = {25},
+  abstract = {SUMMARY The migration of software systems to IaaS (infrastructure as a service)‐ or PaaS (platform as a service)‐based cloud environments enables SaaS providers to benefit from the cloud's merits, such as smoothly scaling up and down existing applications. Our approach, CloudMIG, aims at supporting SaaS providers to perform those migrations. Here, validating the specific constraints that are imposed by a cloud environment constitutes an important early‐phase activity. For example, the access to the file system, number of files, or calls to specific methods may be restricted by cloud providers. Those constraints have to be considered when evaluating the suitability of competing cloud environment candidates. In this paper, we describe CloudMIG's corresponding parts: a generic cloud environment model that incorporates these constraints and appropriate violation detection mechanisms. A software system's conformance can be examined with the assistance of constraint validators. They operate on extracted Knowledge Discovery Meta‐Model‐based system models and can, among others, apply metrics formulated with the Software Metrics Meta‐Model through our metrics execution engine. Additional constraint validators can be plugged into the validation process as needed. In this context, we implemented a prototype and modeled the PaaS environment Google App Engine for Java. We report on a quantitative evaluation regarding the detected constraint violations of five open‐source systems. Copyright © 2012 John Wiley & Sons, Ltd.},
+  doi      = {10.1002/smr.582},
+  groups   = {Cloud Migration},
+  url      = {https://app.dimensions.ai/details/publication/pub.1017004215},
+}
+
+@Article{Khajeh‐Hosseini2011,
+  author   = {Khajeh‐Hosseini, Ali and Greenwood, David and Smith, James W. and Sommerville, Ian},
+  journal  = {Software Practice and Experience},
+  title    = {The Cloud Adoption Toolkit: supporting cloud adoption decisions in the enterprise},
+  year     = {2011},
+  note     = {https://arxiv.org/pdf/1008.1900},
+  number   = {4},
+  pages    = {447-465},
+  volume   = {42},
+  abstract = {SUMMARY Cloud computing promises a radical shift in the provisioning of computing resources within the enterprise. This paper describes the challenges that decision makers face when assessing the feasibility of the adoption of cloud computing in their organizations, and describes our Cloud Adoption Toolkit, which has been developed to support this process. The toolkit provides a framework to support decision makers in identifying their concerns, and matching these concerns to appropriate tools/techniques that can be used to address them. Cost Modeling is the most mature tool in the toolkit, and this paper shows its effectiveness by demonstrating how practitioners can use it to examine the costs of deploying their IT systems on the cloud. The Cost Modeling tool is evaluated using a case study of an organization that is considering the migration of some of its IT systems to the cloud. The case study shows that running systems on the cloud using a traditional ‘always on’ approach can be less cost effective, and the elastic nature of the cloud has to be used to reduce costs. Therefore, decision makers have to model the variations in resource usage and their systems' deployment options to obtain accurate cost estimates. Copyright © 2011 John Wiley & Sons, Ltd.},
+  doi      = {10.1002/spe.1072},
+  groups   = {Cloud Migration},
+  url      = {https://app.dimensions.ai/details/publication/pub.1027646047},
+}
+
+@Article{Hajjat2010,
+  author   = {Hajjat, Mohammad and Sun, Xin and Sung, Yu-Wei Eric and Maltz, David and Rao, Sanjay and Sripanidkulchai, Kunwadee and Tawarmalani, Mohit},
+  journal  = {ACM SIGCOMM Computer Communication Review},
+  title    = {Cloudward bound},
+  year     = {2010},
+  number   = {4},
+  pages    = {243-254},
+  volume   = {40},
+  abstract = {In this paper, we tackle challenges in migrating enterprise services into hybrid cloud-based deployments, where enterprise operations are partly hosted on-premise and partly in the cloud. Such hybrid architectures enable enterprises to benefit from cloud-based architectures, while honoring application performance requirements, and privacy restrictions on what services may be migrated to the cloud. We make several contributions. First, we highlight the complexity inherent in enterprise applications today in terms of their multi-tiered nature, large number of application components, and interdependencies. Second, we have developed a model to explore the benefits of a hybrid migration approach. Our model takes into account enterprise-specific constraints, cost savings, and increased transaction delays and wide-area communication costs that may result from the migration. Evaluations based on real enterprise applications and Azure-based cloud deployments show the benefits of a hybrid migration approach, and the importance of planning which components to migrate. Third, we shed insight on security policies associated with enterprise applications in data centers. We articulate the importance of ensuring assurable reconfiguration of security policies as enterprise applications are migrated to the cloud. We present algorithms to achieve this goal, and demonstrate their efficacy on realistic migration scenarios.},
+  doi      = {10.1145/1851275.1851212},
+  groups   = {Cloud Migration},
+  url      = {https://app.dimensions.ai/details/publication/pub.1063158434},
+}
+
+@InProceedings{Frey2013,
+  author    = {Frey, Sören and Fittkau, Florian and Hasselbring, Wilhelm},
+  booktitle = {2013 35th International Conference on Software Engineering (ICSE)},
+  title     = {Search-Based Genetic Optimization for Deployment and Reconfiguration of Software in the Cloud},
+  year      = {2013},
+  pages     = {512-521},
+  abstract  = {Migrating existing enterprise software to cloud platforms involves the comparison of competing cloud deployment options (CDOs). A CDO comprises a combination of a specific cloud environment, deployment architecture, and runtime reconfiguration rules for dynamic resource scaling. Our simulator CDOSim can evaluate CDOs, e.g., regarding response times and costs. However, the design space to be searched for well-suited solutions is extremely huge. In this paper, we approach this optimization problem with the novel genetic algorithm CDOXplorer. It uses techniques of the search-based software engineering field and CDOSim to assess the fitness of CDOs. An experimental evaluation that employs, among others, the cloud environments Amazon EC2 and Microsoft Windows Azure, shows that CDOXplorer can find solutions that surpass those of other state-of-the-art techniques by up to 60%. Our experiment code and data and an implementation of CDOXplorer are available as open source software.},
+  doi       = {10.1109/icse.2013.6606597},
+  groups    = {Cloud Migration},
+  url       = {https://app.dimensions.ai/details/publication/pub.1095280257},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
 
 @Comment{jabref-meta: grouping:
