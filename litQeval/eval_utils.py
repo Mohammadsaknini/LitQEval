@@ -348,14 +348,8 @@ def fetch_embeddings(topic: str,
             p_pub_ids[i:i+25000], include=["embeddings"])["embeddings"])
     predicted_embeddings = np.concatenate(predicted_embeddings)
 
-    a = topic # lazy fix
-    if a == "Sustainable Biofuel Economy":
-        a = "Sustainable Biofuel"
-    elif a == "Nanopharmaceuticals OR Nanonutraceuticals":
-        a = "Nanoparticles"  
-
     core_embeddings = core_vs.get(core_pubs["id"].tolist(),
-                                  where={"topic": a}, include=[
+                                  where={"topic": topic}, include=[
                                   "embeddings"])["embeddings"]
 
     embeddings = np.vstack([baseline_embeddings, predicted_embeddings])

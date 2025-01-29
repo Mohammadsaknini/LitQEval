@@ -81,7 +81,6 @@ if __name__ == "__main__":
         cos_predicted_recall = len(cos_predicted_cores) / len(core_pubs)
         cos_predicted_f2 = fscore(cos_predicted_precision, cos_predicted_recall, cos_predicted_relevant.shape[0], beta)
 
-
         cluster_baseline_precision = cluster_baseline_relevant.shape[0] / len(baseline_pubs)
         cluster_baseline_recall = cluster_baseline_core / len(core_pubs)
         cluster_baseline_f2 = fscore(cluster_baseline_precision, cluster_baseline_recall, cluster_baseline_relevant.shape[0], beta)
@@ -90,29 +89,33 @@ if __name__ == "__main__":
         cluster_predicted_f2 = fscore(cluster_predicted_precision, cluster_predicted_recall, cluster_predicted_relevant.shape[0], beta)
 
         mvee_baseline_precision = mvee_baseline_relevant.shape[0] / len(baseline_pubs)
-        mvee_baseline_recall = 1
+        mvee_baseline_recall = len(baseline_cp) / len(core_pubs)
         mvee_baseline_f2 = fscore(mvee_baseline_precision, mvee_baseline_recall, mvee_baseline_relevant.shape[0], beta)
         mvee_predicted_precision = mvee_predicted_relevant.shape[0] / len(predicted_pubs)
-        mvee_predicted_recall = 1
+        mvee_predicted_recall = len(predicted_cp) / len(core_pubs)
         mvee_predicted_f2 = fscore(mvee_predicted_precision, mvee_predicted_recall, mvee_predicted_relevant.shape[0], beta)
 
         hull_baseline_precision = hull_baseline_relevant.shape[0] / len(baseline_pubs)
-        hull_baseline_recall = 1
+        hull_baseline_recall = len(baseline_cp) / len(core_pubs)
         hull_baseline_f2 = fscore(hull_baseline_precision, hull_baseline_recall, hull_baseline_relevant.shape[0], beta)
         hull_predicted_precision = hull_predicted_relevant.shape[0] / len(predicted_pubs)
-        hull_predicted_recall = 1
+        hull_predicted_recall = len(predicted_cp) / len(core_pubs)
         hull_predicted_f2 = fscore(hull_predicted_precision, hull_predicted_recall, hull_predicted_relevant.shape[0], beta)
         
         results = pd.DataFrame({
-            "Query": [topic, predicted],
+            "Query": [predicted, topic],
             "Recall": [cos_predicted_recall, cos_baseline_recall],
             "Cosine Precision": [cos_predicted_precision, cos_baseline_precision],
+            "Cosine Relevant": [cos_predicted_relevant.shape[0], cos_baseline_relevant.shape[0]],
             "Cosine F2": [cos_predicted_f2, cos_baseline_f2],
             "Cluster Precision": [cluster_predicted_precision, cluster_baseline_precision],
+            "Cluster Relevant": [cluster_predicted_relevant.shape[0], cluster_baseline_relevant.shape[0]],
             "Cluster F2": [cluster_predicted_f2, cluster_baseline_f2],
             "MVEE Precision": [mvee_predicted_precision, mvee_baseline_precision],
+            "MVEE Relevant": [mvee_predicted_relevant.shape[0], mvee_baseline_relevant.shape[0]],
             "MVEE F2": [mvee_predicted_f2, mvee_baseline_f2],
             "Hull Precision": [hull_predicted_precision, hull_baseline_precision],
+            "Hull Relevant": [hull_predicted_relevant.shape[0], hull_baseline_relevant.shape[0]],
             "Hull F2": [hull_predicted_f2, hull_baseline_f2]
         }, index=["Predicted", "Baseline"])
         
